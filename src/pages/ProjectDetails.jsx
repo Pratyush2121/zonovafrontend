@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Target, ShieldCheck, Flame, Cpu, Star, MessageSquare, Sparkles } from 'lucide-react';
 import SEO from '../components/SEO';
 import Spinner from '../components/Spinner';
+import { resolveUrl } from '../utils/resolveUrl.js';
 
 const ProjectDetails = () => {
   const { id } = useParams();
@@ -224,7 +225,7 @@ const ProjectDetails = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {project.screenshots.map((screen, idx) => (
                     <div key={idx} className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 hover:border-primary/30 transition-all duration-300">
-                      <img src={screen} alt={`Screenshot ${idx + 1}`} className="w-full h-auto object-cover" />
+                      <img src={resolveUrl(screen)} alt={`Screenshot ${idx + 1}`} className="w-full h-auto object-cover" />
                     </div>
                   ))}
                 </div>

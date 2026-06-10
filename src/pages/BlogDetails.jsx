@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, Calendar, User, Share2, BookOpen } from 'lucide-react';
 import SEO from '../components/SEO';
 import Spinner from '../components/Spinner';
+import { resolveUrl } from '../utils/resolveUrl.js';
 
 const BlogDetails = () => {
   const { slug } = useParams();
@@ -143,7 +144,7 @@ const BlogDetails = () => {
 
         {/* Featured Image */}
         <div className="rounded-3xl overflow-hidden bg-slate-100 border border-slate-200 aspect-video hover:border-primary/30 transition-all duration-300">
-          <img src={blog.featuredImage || '/images/blog1.svg'} alt={blog.title} className="w-full h-full object-cover" />
+          <img src={resolveUrl(blog.featuredImage) || '/images/blog1.svg'} alt={blog.title} className="w-full h-full object-cover" />
         </div>
 
         {/* Article Body Content */}

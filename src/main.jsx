@@ -7,7 +7,7 @@ import App from './App.jsx'
 const originalFetch = window.fetch;
 window.fetch = function (url, options) {
   if (typeof url === 'string') {
-    const backendUrl = import.meta.env.VITE_API_URL || '';
+    const backendUrl = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? 'https://zonovatechnology.netlify.app' : '');
     if (backendUrl && (url.startsWith('/api/') || url.startsWith('/uploads/'))) {
       url = `${backendUrl}${url}`;
     }

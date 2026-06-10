@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { ArrowRight, CheckCircle2, ChevronRight, MessageSquare, Star, ArrowUpRight, TrendingUp, Sparkles, Send, Lightbulb, Cpu, Rocket } from 'lucide-react';
 import SEO from '../components/SEO';
 import Spinner from '../components/Spinner';
+import { resolveUrl } from '../utils/resolveUrl.js';
 
 const Home = () => {
   const { settings } = useSelector((state) => state.settings);
@@ -492,7 +493,7 @@ const Home = () => {
                 <article key={blog._id || blog.id} className="premium-card rounded-2xl overflow-hidden bg-white">
                   <div className="h-48 overflow-hidden bg-slate-100">
                     <img
-                      src={blog.featuredImage || '/images/web_saas_marketing.png'}
+                      src={resolveUrl(blog.featuredImage) || '/images/web_saas_marketing.png'}
                       alt={blog.title}
                       className="w-full h-full object-cover"
                     />

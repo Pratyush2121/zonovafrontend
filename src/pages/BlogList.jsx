@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Search, BookOpen, Clock, ChevronRight } from 'lucide-react';
 import SEO from '../components/SEO';
 import Spinner from '../components/Spinner';
+import { resolveUrl } from '../utils/resolveUrl.js';
 
 const BlogList = () => {
   const [blogs, setBlogs] = useState([]);
@@ -152,7 +153,7 @@ const BlogList = () => {
                     {/* Header Image */}
                     <div className="h-52 bg-slate-100 overflow-hidden">
                       <img
-                        src={blog.featuredImage || '/images/blog1.svg'}
+                        src={resolveUrl(blog.featuredImage) || '/images/blog1.svg'}
                         alt={blog.title}
                         className="w-full h-full object-cover"
                       />
