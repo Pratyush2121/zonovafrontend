@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Clock, Calendar, User, Share2 } from 'lucide-react';
+import { ArrowLeft, Clock, Calendar, User, Share2, BookOpen } from 'lucide-react';
 import SEO from '../components/SEO';
 import Spinner from '../components/Spinner';
 
@@ -94,41 +94,55 @@ const BlogDetails = () => {
     <div className="bg-white">
       <SEO title={blog.title} description={blog.metaDescription} />
 
-      {/* Header back bar */}
-      <section className="bg-slate-50 border-b border-slate-100 py-6">
-        <div className="max-w-4xl mx-auto px-4 text-left">
-          <Link to="/blog" className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-primary transition-all">
+      {/* Header Banner */}
+      <section className="relative overflow-hidden bg-bgSec py-12 border-b border-slate-100">
+        {/* Floating stickers */}
+        <div className="absolute top-[15%] left-[5%] animate-float-slow hidden md:block">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-extrabold shadow-sm select-none">
+            📖 Industry Insights
+          </span>
+        </div>
+        <div className="absolute bottom-[15%] right-[5%] animate-float-fast hidden md:block">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cyan-50 border border-cyan-100 text-cyan-700 text-xs font-extrabold shadow-sm select-none">
+            💡 Strategy Vetted
+          </span>
+        </div>
+
+        <div className="max-w-4xl mx-auto px-4 text-left space-y-4 relative z-10">
+          <Link to="/blog" className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-primary transition-all mb-2">
             <ArrowLeft size={16} />
             <span>All Articles</span>
           </Link>
+          
+          <div className="space-y-3">
+            <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+              <BookOpen size={24} />
+            </div>
+            <span className="inline-block bg-primary/10 border border-primary/20 text-primary font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">
+              {blog.category}
+            </span>
+            <h1 className="text-3xl sm:text-5xl font-black text-secondary leading-tight tracking-tight">
+              {blog.title}
+            </h1>
+            <div className="flex flex-wrap items-center gap-6 text-sm text-slate-400 pt-2 border-t border-slate-100 mt-4">
+              <div className="flex items-center gap-1.5 pt-2">
+                <User size={16} />
+                <span>By {blog.author}</span>
+              </div>
+              <div className="flex items-center gap-1.5 pt-2">
+                <Clock size={16} />
+                <span>{blog.readTime || '5 min read'}</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Main post area */}
       <article className="py-16 max-w-4xl mx-auto px-4 text-left space-y-8">
-        
-        {/* Post Metadata Header */}
-        <div className="space-y-4">
-          <span className="inline-block bg-primary/10 border border-primary/20 text-primary font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">
-            {blog.category}
-          </span>
-          <h1 className="text-3xl sm:text-5xl font-black text-secondary leading-tight tracking-tight">
-            {blog.title}
-          </h1>
-          <div className="flex flex-wrap items-center gap-6 text-sm text-slate-400 pt-2 border-y border-slate-100 py-4">
-            <div className="flex items-center gap-1.5">
-              <User size={16} />
-              <span>By {blog.author}</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <Clock size={16} />
-              <span>{blog.readTime || '5 min read'}</span>
-            </div>
-          </div>
-        </div>
 
         {/* Featured Image */}
-        <div className="rounded-3xl overflow-hidden bg-slate-100 border border-slate-200 aspect-video">
+        <div className="rounded-3xl overflow-hidden bg-slate-100 border border-slate-200 aspect-video hover:border-primary/30 transition-all duration-300">
           <img src={blog.featuredImage || '/images/blog1.svg'} alt={blog.title} className="w-full h-full object-cover" />
         </div>
 

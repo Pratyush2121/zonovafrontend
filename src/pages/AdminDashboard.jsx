@@ -36,8 +36,13 @@ const AdminDashboard = () => {
   const [privacyPolicy, setPrivacyPolicy] = useState({ title: '', content: '' });
   const [termsPolicy, setTermsPolicy] = useState({ title: '', content: '' });
   const [usersList, setUsersList] = useState([]);
-  const [projectsList, setProjectsList] = useState([]);
   const [blogsList, setBlogsList] = useState([]);
+  const [jobsList, setJobsList] = useState([]);
+  
+  // Job Listing Form State
+  const [jobForm, setJobForm] = useState({
+    title: '', location: '', type: 'Full-Time', salary: '', desc: '', requirements: ''
+  });
 
   // Common UI State
   const [loading, setLoading] = useState(true);
@@ -68,7 +73,7 @@ const AdminDashboard = () => {
   // Auto redirect if not logged in
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate('/admin/login');
+      navigate('/adminhu');
     }
   }, [isAuthenticated, navigate]);
 
@@ -108,6 +113,10 @@ const AdminDashboard = () => {
         case 'blogs':
           const blogsData = await fetchSafe('/api/blogs');
           if (blogsData.success) setBlogsList(blogsData.blogs || []);
+          break;
+        case 'jobs':
+          const jobsData = await fetchSafe('/api/jobs');
+          if (jobsData.success) setJobsList(jobsData.jobs || []);
           break;
         case 'leads':
           const leadsData = await fetchSafe('/api/leads', { headers });
@@ -248,6 +257,10 @@ const AdminDashboard = () => {
       const blogsData = await fetchSafe('/api/blogs');
       if (blogsData.success) setBlogsList(blogsData.blogs || []);
       
+      await delay(100);
+      const jobsData = await fetchSafe('/api/jobs');
+      if (jobsData.success) setJobsList(jobsData.jobs || []);
+      
       // Seed Settings form
       setSettingsForm({
         phone1: settings?.phone1 || '',
@@ -280,7 +293,7 @@ const AdminDashboard = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate('/admin/login');
+    navigate('/adminhu');
   };
 
   // CSV Export Trigger
@@ -455,6 +468,36 @@ const AdminDashboard = () => {
       }
     } catch (err) {
       console.error(err);
+    }
+  };
+
+  const handleJobSubmit = async (e) => {
+    e.preventDefault();
+    setCrudError('');
+    setCrudSuccess('');
+    
+    const method = modalType === 'add-job' ? 'POST' : 'PUT';
+    const url = modalType === 'add-job' ? '/api/jobs' : `/api/jobs/${selectedItem._id || selectedItem.id}`;
+    
+    try {
+      const res = await fetch(url, {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(jobForm)
+      });
+      const data = await res.json();
+      if (data.success) {
+        setCrudSuccess('Job opportunity saved successfully!');
+        setModalOpen(false);
+        refreshData();
+      } else {
+        setCrudError(data.message || 'Operation failed.');
+      }
+    } catch (err) {
+      setCrudError('Connection error.');
     }
   };
 
@@ -635,6 +678,26 @@ const AdminDashboard = () => {
     setModalOpen(true);
   };
 
+  const openAddJob = () => {
+    setModalType('add-job');
+    setJobForm({ title: '', location: '', type: 'Full-Time', salary: '', desc: '', requirements: '' });
+    setModalOpen(true);
+  };
+
+  const openEditJob = (j) => {
+    setSelectedItem(j);
+    setModalType('edit-job');
+    setJobForm({
+      title: j.title || '',
+      location: j.location || '',
+      type: j.type || 'Full-Time',
+      salary: j.salary || '',
+      desc: j.desc || '',
+      requirements: j.requirements ? j.requirements.join(', ') : ''
+    });
+    setModalOpen(true);
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50">
@@ -651,6 +714,7 @@ const AdminDashboard = () => {
     { id: 'meetings', label: 'Meetings Scheduler', icon: <Calendar size={16} /> },
     { id: 'startups', label: 'Startup Partners', icon: <Briefcase size={16} /> },
     { id: 'careers', label: 'Job Candidates', icon: <Users size={16} /> },
+    { id: 'jobs', label: 'Career Opportunities', icon: <Briefcase size={16} /> },
     { id: 'team', label: 'Team Members', icon: <Users size={16} /> },
     { id: 'testimonials', label: 'Client Reviews', icon: <MessageSquare size={16} /> },
     { id: 'newsletter', label: 'Newsletter list', icon: <Mail size={16} /> },
@@ -1530,6 +1594,60 @@ const AdminDashboard = () => {
             </div>
           )}
 
+          {/* TAB 15: Career Opportunities CRUD */}
+          {activeTab === 'jobs' && (
+            <div className="space-y-6 text-left animate-fade-in">
+              <div className="flex justify-between items-center">
+                <h3 className="font-extrabold text-lg text-secondary">Manage Career Opportunities</h3>
+                <button
+                  onClick={openAddJob}
+                  className="bg-primary hover:bg-primary-dark text-white px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all"
+                >
+                  <PlusCircle size={16} />
+                  <span>Add Opportunity</span>
+                </button>
+              </div>
+
+              <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+                <table className="w-full text-left border-collapse text-xs">
+                  <thead>
+                    <tr className="bg-slate-50 border-b border-slate-100 text-slate-500 font-bold">
+                      <th className="p-4">Job Title</th>
+                      <th className="p-4">Location</th>
+                      <th className="p-4">Type</th>
+                      <th className="p-4">Salary</th>
+                      <th className="p-4 text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100 text-slate-600">
+                    {jobsList.map((j) => (
+                      <tr key={j._id || j.id} className="hover:bg-slate-50/50">
+                        <td className="p-4 font-semibold text-secondary">{j.title}</td>
+                        <td className="p-4">{j.location}</td>
+                        <td className="p-4 uppercase font-bold text-[10px] text-slate-500">{j.type}</td>
+                        <td className="p-4 font-medium">{j.salary}</td>
+                        <td className="p-4 text-right flex justify-end gap-2">
+                          <button
+                            onClick={() => openEditJob(j)}
+                            className="p-1.5 hover:bg-slate-100 text-slate-500 rounded-lg"
+                          >
+                            <Edit size={14} />
+                          </button>
+                          <button
+                            onClick={() => handleDeleteItem('jobs', j._id || j.id)}
+                            className="p-1.5 hover:bg-rose-50 text-rose-500 rounded-lg"
+                          >
+                            <Trash2 size={14} />
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
         </main>
       </div>
 
@@ -1868,6 +1986,91 @@ const AdminDashboard = () => {
                   className="w-full bg-primary hover:bg-primary-dark text-white py-3 rounded-xl text-xs font-bold"
                 >
                   Save Review
+                </button>
+              </form>
+            )}
+
+            {/* F. Job Form */}
+            {(modalType === 'add-job' || modalType === 'edit-job') && (
+              <form onSubmit={handleJobSubmit} className="space-y-4">
+                <h3 className="font-extrabold text-2xl text-secondary">
+                  {modalType === 'add-job' ? 'Add Job Position' : 'Edit Job Position'}
+                </h3>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">Job Title</label>
+                    <input
+                      type="text" required
+                      value={jobForm.title}
+                      onChange={(e) => setJobForm({ ...jobForm, title: e.target.value })}
+                      className="w-full px-3 py-2 border rounded-lg text-xs"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">Location</label>
+                    <input
+                      type="text" required
+                      value={jobForm.location}
+                      onChange={(e) => setJobForm({ ...jobForm, location: e.target.value })}
+                      className="w-full px-3 py-2 border rounded-lg text-xs"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">Job Type</label>
+                    <select
+                      value={jobForm.type}
+                      onChange={(e) => setJobForm({ ...jobForm, type: e.target.value })}
+                      className="w-full px-3 py-2 border rounded-lg text-xs bg-white"
+                    >
+                      <option value="Full-Time">Full-Time</option>
+                      <option value="Part-Time">Part-Time</option>
+                      <option value="Contract">Contract</option>
+                      <option value="Remote">Remote</option>
+                      <option value="Internship">Internship</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">Salary Range</label>
+                    <input
+                      type="text" required
+                      value={jobForm.salary}
+                      onChange={(e) => setJobForm({ ...jobForm, salary: e.target.value })}
+                      placeholder="e.g. ₹12L - ₹18L per annum"
+                      className="w-full px-3 py-2 border rounded-lg text-xs"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Job Description</label>
+                  <textarea
+                    required rows={3}
+                    value={jobForm.desc}
+                    onChange={(e) => setJobForm({ ...jobForm, desc: e.target.value })}
+                    className="w-full px-3 py-2 border rounded-lg text-xs"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Key Requirements (comma-separated)</label>
+                  <textarea
+                    required rows={2}
+                    value={jobForm.requirements}
+                    onChange={(e) => setJobForm({ ...jobForm, requirements: e.target.value })}
+                    placeholder="e.g. 3+ years experience, React, Node.js"
+                    className="w-full px-3 py-2 border rounded-lg text-xs"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full bg-primary hover:bg-primary-dark text-white py-2.5 rounded-lg text-xs font-bold"
+                >
+                  Save Job Listing
                 </button>
               </form>
             )}

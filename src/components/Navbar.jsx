@@ -51,17 +51,13 @@ const Navbar = () => {
             </a>
           </div>
           <div className="flex items-center gap-4">
-            {isAuthenticated ? (
+            {isAuthenticated && (
               <Link
                 to="/admin/dashboard"
                 className="flex items-center gap-1 text-accent hover:underline font-semibold"
               >
                 <ShieldCheck size={14} />
                 <span>Portal ({user?.role})</span>
-              </Link>
-            ) : (
-              <Link to="/admin/login" className="text-slate-400 hover:text-white transition-colors">
-                Admin Area
               </Link>
             )}
           </div>
@@ -116,7 +112,7 @@ const Navbar = () => {
               </Link>
               <Link
                 to="/book-meeting"
-                className="inline-flex items-center gap-1.5 bg-primary hover:bg-primary-dark text-white px-4 py-2.5 rounded-lg text-sm font-semibold shadow-md shadow-primary/10 transition-all"
+                className="inline-flex items-center gap-1.5 btn-colorful px-4 py-2.5 rounded-lg text-sm font-semibold transition-all hover:scale-[1.02]"
               >
                 <span>Book Strategy Call</span>
                 <ArrowRight size={14} />
@@ -164,7 +160,7 @@ const Navbar = () => {
                 <Link
                   to="/book-meeting"
                   onClick={() => setIsOpen(false)}
-                  className="w-full text-center bg-primary hover:bg-primary-dark text-white py-2.5 rounded-lg font-semibold shadow-md shadow-primary/10"
+                  className="w-full text-center btn-colorful py-2.5 rounded-lg font-semibold transition-all hover:scale-[1.02]"
                 >
                   Book Strategy Call
                 </Link>

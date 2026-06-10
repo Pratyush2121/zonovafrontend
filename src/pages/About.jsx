@@ -35,8 +35,23 @@ const About = () => {
       <SEO title="About Us" description="Learn about Zonova Technologies story, mission, core values, and our team of growth executives and software architects." />
 
       {/* Header Banner */}
-      <section className="bg-bgSec py-16 border-b border-slate-100">
-        <div className="max-w-4xl mx-auto px-4 text-center space-y-4">
+      <section className="relative overflow-hidden bg-bgSec py-20 border-b border-slate-100">
+        {/* Floating stickers */}
+        <div className="absolute top-[15%] left-[5%] animate-float-slow hidden md:block">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-extrabold shadow-sm select-none">
+            🚀 Venture Studio
+          </span>
+        </div>
+        <div className="absolute bottom-[15%] right-[5%] animate-float-medium hidden md:block">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cyan-50 border border-cyan-100 text-cyan-700 text-xs font-extrabold shadow-sm select-none">
+            💡 Execution Focus
+          </span>
+        </div>
+
+        <div className="max-w-4xl mx-auto px-4 text-center space-y-4 relative z-10">
+          <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-2 text-primary">
+            <Users size={24} />
+          </div>
           <h1 className="text-4xl sm:text-5xl font-black text-secondary tracking-tight">
             We Build Vetted Ventures
           </h1>
@@ -101,7 +116,7 @@ const About = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {coreValues.map((v, i) => (
-              <div key={i} className="p-8 bg-white rounded-2xl border border-slate-200/80 shadow-sm text-left space-y-4">
+              <div key={i} className="premium-card p-8 bg-white rounded-2xl border border-slate-200/80 shadow-sm text-left space-y-4 hover:border-primary/30 transition-all duration-300">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
                   {v.icon}
                 </div>
@@ -113,62 +128,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Leadership / Team Grid */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="text-3xl font-extrabold text-secondary tracking-tight">Our Leadership Team</h2>
-          <p className="text-slate-500 mt-2">The architects, builders, and growth hackers co-steering Zonova.</p>
-        </div>
-
-        {loading ? (
-          <Spinner />
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {team.length > 0 ? (
-              team.map((member) => (
-                <div key={member._id || member.id} className="p-6 border border-slate-200 rounded-2xl text-center hover:shadow-md transition-shadow bg-white">
-                  <img
-                    src={member.image || '/images/team1.svg'}
-                    alt={member.name}
-                    className="w-24 h-24 rounded-full mx-auto object-cover border border-slate-200"
-                  />
-                  <h3 className="text-lg font-bold text-secondary mt-4">{member.name}</h3>
-                  <p className="text-xs text-primary font-semibold uppercase tracking-wider">{member.role}</p>
-                  <p className="text-xs text-slate-500 mt-3">{member.bio || 'Venture builder'}</p>
-                </div>
-              ))
-            ) : (
-              // Default team members if none loaded
-              <>
-                <div className="p-6 border border-slate-200 rounded-2xl text-center bg-white hover:shadow-md transition-shadow">
-                  <img src="/images/team1.svg" alt="Director" className="w-24 h-24 rounded-full mx-auto object-cover border" />
-                  <h3 className="text-lg font-bold text-secondary mt-4">Abhinav Neeraj Mishra</h3>
-                  <p className="text-xs text-primary font-semibold uppercase tracking-wider">Co-Founder & Director</p>
-                  <p className="text-xs text-slate-500 mt-3">Strategic growth director and venture manager.</p>
-                </div>
-                <div className="p-6 border border-slate-200 rounded-2xl text-center bg-white hover:shadow-md transition-shadow">
-                  <img src="/images/team2.svg" alt="Director" className="w-24 h-24 rounded-full mx-auto object-cover border" />
-                  <h3 className="text-lg font-bold text-secondary mt-4">Siddhesh Pradeep Rane</h3>
-                  <p className="text-xs text-primary font-semibold uppercase tracking-wider">Co-Founder & Director</p>
-                  <p className="text-xs text-slate-500 mt-3">Systems architect and technology director.</p>
-                </div>
-                <div className="p-6 border border-slate-200 rounded-2xl text-center bg-white hover:shadow-md transition-shadow">
-                  <img src="/images/team3.svg" alt="Marketing" className="w-24 h-24 rounded-full mx-auto object-cover border" />
-                  <h3 className="text-lg font-bold text-secondary mt-4">Neha Mehta</h3>
-                  <p className="text-xs text-primary font-semibold uppercase tracking-wider">Head of Growth Marketing</p>
-                  <p className="text-xs text-slate-500 mt-3">Performance acquisition specialist.</p>
-                </div>
-                <div className="p-6 border border-slate-200 rounded-2xl text-center bg-white hover:shadow-md transition-shadow">
-                  <img src="/images/team4.svg" alt="Product" className="w-24 h-24 rounded-full mx-auto object-cover border" />
-                  <h3 className="text-lg font-bold text-secondary mt-4">Sanjay Patel</h3>
-                  <p className="text-xs text-primary font-semibold uppercase tracking-wider">Head of Product Delivery</p>
-                  <p className="text-xs text-slate-500 mt-3">Agile execution & client manager.</p>
-                </div>
-              </>
-            )}
-          </div>
-        )}
-      </section>
 
       {/* Official Corporate Registration Section */}
       <section className="py-20 bg-slate-50 border-t border-slate-200">

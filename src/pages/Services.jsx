@@ -112,8 +112,23 @@ const Services = () => {
       <SEO title="Services & Capabilities" description="Browse all 16 venture building, MVP engineering, performance marketing, and operation automation services provided by Zonova." />
 
       {/* Banner */}
-      <section className="bg-bgSec py-16 border-b border-slate-100">
-        <div className="max-w-4xl mx-auto px-4 text-center space-y-4">
+      <section className="relative overflow-hidden bg-bgSec py-20 border-b border-slate-100">
+        {/* Floating stickers */}
+        <div className="absolute top-[15%] left-[5%] animate-float-fast hidden md:block">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-extrabold shadow-sm select-none">
+            ⚙️ Automations
+          </span>
+        </div>
+        <div className="absolute bottom-[15%] right-[5%] animate-float-slow hidden md:block">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-rose-50 border border-rose-100 text-rose-700 text-xs font-extrabold shadow-sm select-none">
+            📈 SEO & Marketing
+          </span>
+        </div>
+
+        <div className="max-w-4xl mx-auto px-4 text-center space-y-4 relative z-10">
+          <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-2 text-primary">
+            <Compass size={24} />
+          </div>
           <h1 className="text-4xl sm:text-5xl font-black text-secondary tracking-tight">
             Our Venture Capabilities
           </h1>
@@ -127,7 +142,7 @@ const Services = () => {
       <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {serviceList.map((srv, idx) => (
-            <div key={idx} className="premium-card p-6 bg-white border border-slate-200/80 rounded-2xl text-left flex flex-col justify-between">
+            <div key={idx} className="premium-card p-6 bg-white border border-slate-200/80 rounded-2xl text-left flex flex-col justify-between hover:border-primary/30 transition-all duration-300">
               <div className="space-y-4">
                 <div className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center">
                   {srv.icon}

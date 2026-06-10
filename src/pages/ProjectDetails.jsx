@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Target, ShieldCheck, Flame, Cpu, Star, MessageSquare } from 'lucide-react';
+import { ArrowLeft, Target, ShieldCheck, Flame, Cpu, Star, MessageSquare, Sparkles } from 'lucide-react';
 import SEO from '../components/SEO';
 import Spinner from '../components/Spinner';
 
@@ -56,6 +56,66 @@ const ProjectDetails = () => {
       testimonialRole: 'Director',
       testimonialText: 'The stream response visualizer is outstanding. It is exactly the premium corporate UI we wanted to show.',
       testimonialCompany: 'LogiTrack India'
+    },
+    'saas-1': {
+      title: 'Learning Management System (LMS)',
+      description: 'A comprehensive educational platform currently affiliated with 2 active schools. Features role-based access for students, teachers, and administrators, interactive gradebooks, lesson planning, and digital submission boards.',
+      category: 'SaaS',
+      clientGoals: 'Provide a centralized virtual classroom interface, digitize grade reporting, and streamline secure homework submission flows.',
+      challenges: 'Maintaining secure role-based access controls across hundreds of parallel user roles (students, teachers, admins) while ensuring swift, responsive rendering of dynamic gradebooks on low-end school tablet devices.',
+      solution: 'Engineered a highly granular RBAC system in Node/Express middleware. Optimized MongoDB query projections for class grade listings and implemented React-Virtual virtualization for rendering extremely long student rosters.',
+      results: 'Active affiliation with 2 schools, serving over 1,500+ active students with 99.9% portal uptime and immediate grade sync.',
+      screenshots: ['/images/project_saas.svg', '/images/project_mobile.svg'],
+      technologyStack: ['React', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS'],
+      testimonialAuthor: 'Principal R. K. Sharma',
+      testimonialRole: 'Executive Principal',
+      testimonialText: 'This LMS transformed our administrative workflows overnight. Grade entries and teacher reviews that used to take weeks now happen instantly.',
+      testimonialCompany: 'St. Xavier Academy'
+    },
+    'saas-2': {
+      title: 'Chemist Portal',
+      description: 'An advanced cloud platform built for pharmacy stores to manage prescription tracking, real-time inventory levels, dynamic supply order pipelines, and automated customer billing.',
+      category: 'SaaS',
+      clientGoals: 'Ensure zero inventory tracking leakage, digitize doctor prescription validations, and accelerate checkout lines with automatic stock deduction.',
+      challenges: 'Syncing instant inventory levels across multiple terminal counters during high-volume rush hours, and flagging dangerous drug interaction conflicts in real time.',
+      solution: 'Built a WebSockets-enabled real-time inventory syncer. Designed a fast cross-reference engine matching prescribed drugs against a conflict database, notifying pharmacists in milliseconds.',
+      results: 'Optimized stock inventory, reducing management overhead by 30% and eliminating stock discrepancy errors completely.',
+      screenshots: ['/images/project_saas.svg', '/images/project_ai.svg'],
+      technologyStack: ['React', 'Redux Toolkit', 'Node.js', 'Express', 'MongoDB'],
+      testimonialAuthor: 'Dr. Aniket Patil',
+      testimonialRole: 'Head Pharmacist',
+      testimonialText: 'We no longer face supply stock-outs. The automatic order recommendations and instant billing has increased our daily transaction throughput.',
+      testimonialCompany: 'Patil Medico & Chemists'
+    },
+    'saas-3': {
+      title: 'DPMS Patient Care Platform',
+      description: 'Clinic and hospital software designed to streamline complete patient pathways. Manages end-to-end IPD (In-Patient Department) admissions and OPD (Out-Patient Department) booking, billing, and electronic health logs.',
+      category: 'SaaS',
+      clientGoals: 'Eliminate paper billing logs, decrease patient OPD waiting line duration, and secure confidential patient medical history records.',
+      challenges: 'Adhering to strict data protection standards while allowing doctors immediate, lag-free access to historical patient health charts during emergency admissions.',
+      solution: 'Implemented AES-256 field-level encryption for health logs. Built a custom queue manager to coordinate OPD check-ins and direct patients dynamically to vacant consultation cabins.',
+      results: 'Reduced client check-in registration times by over 40% and improved patient satisfaction ratings across clinic branches.',
+      screenshots: ['/images/project_saas.svg', '/images/project_mobile.svg'],
+      technologyStack: ['React', 'Tailwind CSS', 'Node.js', 'Express', 'MongoDB'],
+      testimonialAuthor: 'Dr. Shalini Deshmukh',
+      testimonialRole: 'Medical Director',
+      testimonialText: 'DPMS has completely modernized our hospital workflow. Secure patient check-in is incredibly simple, and billing records are now completely unified.',
+      testimonialCompany: 'Deshmukh Care Clinic'
+    },
+    'saas-4': {
+      title: 'College Management System',
+      description: 'Enterprise college automation system. Coordinates administrative student records, semester registrations, automated fee schedule invoicing, and report card publishing.',
+      category: 'SaaS',
+      clientGoals: 'Automate semester registration steps, handle digital semester fee payments, and coordinate class schedule calendars.',
+      challenges: 'Handling sudden surges in server traffic when semester results are published, causing database lockups and payment checkout dropouts.',
+      solution: 'Deployed database replica sets to scale query operations. Integrated Stripe and Razorpay webhook hooks to ensure payment reconciliation occurs asynchronously even under extreme load.',
+      results: 'Fully modular custom deployment, handling admissions, scheduling, and fee collections for over 5,000 enrolled students.',
+      screenshots: ['/images/project_saas.svg', '/images/project_ai.svg'],
+      technologyStack: ['React', 'Node.js', 'Express', 'MongoDB', 'Stripe'],
+      testimonialAuthor: 'Dean Arvind Swamy',
+      testimonialRole: 'Registrar',
+      testimonialText: 'Student registration was a huge administrative burden. Zonova automated the entire workflow, from seat allocation to digital fee receipting.',
+      testimonialCompany: 'Vidyalankar Institute'
     }
   };
 
@@ -111,13 +171,37 @@ const ProjectDetails = () => {
     <div className="bg-white">
       <SEO title={project.title} description={project.description} />
 
-      {/* Header Back bar */}
-      <section className="bg-slate-50 border-b border-slate-100 py-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
-          <Link to="/portfolio" className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-primary transition-all">
+      {/* Header Banner */}
+      <section className="relative overflow-hidden bg-bgSec py-12 border-b border-slate-100">
+        {/* Floating stickers */}
+        <div className="absolute top-[15%] left-[5%] animate-float-slow hidden md:block">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-extrabold shadow-sm select-none">
+            🚀 Live Metrics
+          </span>
+        </div>
+        <div className="absolute bottom-[15%] right-[5%] animate-float-fast hidden md:block">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cyan-50 border border-cyan-100 text-cyan-700 text-xs font-extrabold shadow-sm select-none">
+            🔧 Venture Stack
+          </span>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left space-y-4 relative z-10">
+          <Link to="/portfolio" className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-primary transition-all mb-2">
             <ArrowLeft size={16} />
-            <span>Case Studies</span>
+            <span>Back to Case Studies</span>
           </Link>
+          
+          <div className="space-y-3">
+            <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+              <Sparkles size={24} />
+            </div>
+            <span className="inline-block bg-primary/10 text-primary border border-primary/20 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">
+              {project.category}
+            </span>
+            <h1 className="text-4xl sm:text-5xl font-black text-secondary tracking-tight leading-tight">
+              {project.title}
+            </h1>
+          </div>
         </div>
       </section>
 
@@ -128,12 +212,6 @@ const ProjectDetails = () => {
           {/* Left Column: Core Narrative */}
           <div className="lg:col-span-2 space-y-10">
             <div className="space-y-4">
-              <span className="inline-block bg-primary/10 text-primary border border-primary/20 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full">
-                {project.category}
-              </span>
-              <h1 className="text-4xl sm:text-5xl font-black text-secondary tracking-tight leading-tight">
-                {project.title}
-              </h1>
               <p className="text-slate-500 text-lg leading-relaxed">
                 {project.description}
               </p>
@@ -145,7 +223,7 @@ const ProjectDetails = () => {
                 <h3 className="font-extrabold text-xl text-secondary">Visual Walkthrough</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {project.screenshots.map((screen, idx) => (
-                    <div key={idx} className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-50">
+                    <div key={idx} className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 hover:border-primary/30 transition-all duration-300">
                       <img src={screen} alt={`Screenshot ${idx + 1}`} className="w-full h-auto object-cover" />
                     </div>
                   ))}
@@ -197,7 +275,7 @@ const ProjectDetails = () => {
           <div className="lg:col-span-1 space-y-8">
             {/* Results Callout */}
             {project.results && (
-              <div className="p-8 rounded-3xl bg-emerald-50 border border-emerald-100 space-y-4">
+              <div className="p-8 rounded-3xl bg-emerald-50 border border-emerald-100 space-y-4 hover:border-emerald-300 transition-all duration-300">
                 <span className="text-xs font-black text-emerald-600 uppercase tracking-widest block">The Result</span>
                 <p className="text-2xl font-black text-slate-800 leading-tight">
                   {project.results}
@@ -206,7 +284,7 @@ const ProjectDetails = () => {
             )}
 
             {/* Tech Stack List */}
-            <div className="p-8 rounded-3xl border border-slate-200 space-y-4">
+            <div className="p-8 rounded-3xl border border-slate-200 hover:border-primary/30 transition-all duration-300 space-y-4">
               <h4 className="font-extrabold text-sm text-secondary uppercase tracking-widest">Technology Stack</h4>
               <div className="flex flex-wrap gap-2">
                 {project.technologyStack?.map((tech, idx) => (
@@ -219,7 +297,7 @@ const ProjectDetails = () => {
 
             {/* Testimonial Card */}
             {project.testimonialText && (
-              <div className="p-8 rounded-3xl bg-slate-50 border border-slate-100 space-y-6">
+              <div className="p-8 rounded-3xl bg-slate-50 border border-slate-200 hover:border-primary/30 transition-all duration-300 space-y-6">
                 <div className="flex gap-1">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} size={16} className="fill-amber-400 text-amber-400" />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { ArrowRight, CheckCircle2, ChevronRight, MessageSquare, Star, ArrowUpRight, TrendingUp, Sparkles, Send } from 'lucide-react';
+import { ArrowRight, CheckCircle2, ChevronRight, MessageSquare, Star, ArrowUpRight, TrendingUp, Sparkles, Send, Lightbulb, Cpu, Rocket } from 'lucide-react';
 import SEO from '../components/SEO';
 import Spinner from '../components/Spinner';
 
@@ -88,10 +88,10 @@ const Home = () => {
   ];
 
   const steps = [
-    { step: '01', title: 'Validate Idea', desc: 'We stress-test ideas against target audiences and market data.' },
-    { step: '02', title: 'Build Prototype & MVP', desc: 'Quickly develop interactive high-quality prototypes and MVPs.' },
-    { step: '03', title: 'Launch & Acquire', desc: 'Set up marketing funnels and automation to generate active revenue.' },
-    { step: '04', title: 'Scale & Optimize', desc: 'Continuously iterate performance, product, and cost models.' }
+    { step: '01', title: 'Validate Idea', desc: 'We stress-test ideas against target audiences and market data.', icon: <Lightbulb className="w-6 h-6 text-indigo-500" /> },
+    { step: '02', title: 'Build Prototype & MVP', desc: 'Quickly develop interactive high-quality prototypes and MVPs.', icon: <Cpu className="w-6 h-6 text-cyan-500" /> },
+    { step: '03', title: 'Launch & Acquire', desc: 'Set up marketing funnels and automation to generate active revenue.', icon: <Rocket className="w-6 h-6 text-amber-500" /> },
+    { step: '04', title: 'Scale & Optimize', desc: 'Continuously iterate performance, product, and cost models.', icon: <TrendingUp className="w-6 h-6 text-emerald-500" /> }
   ];
 
   const coreValues = [
@@ -113,10 +113,10 @@ const Home = () => {
       <SEO title="Home - Build. Launch. Scale." />
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-20 pb-24 lg:pt-28 lg:pb-32 bg-gradient-to-b from-bgSec/40 via-white to-white">
+      <section className="relative overflow-hidden pt-6 pb-16 md:pt-16 lg:pt-28 lg:pb-32 bg-gradient-to-b from-bgSec/40 via-white to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            
+
             {/* Hero Text */}
             <div className="space-y-8 text-left animate-fade-in">
               <div className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary/10 text-primary text-xs font-extrabold uppercase tracking-wider">
@@ -139,16 +139,16 @@ const Home = () => {
               <div className="flex flex-col sm:flex-row gap-4 pt-2">
                 <Link
                   to="/book-meeting"
-                  className="inline-flex items-center justify-center gap-3 bg-slate-900 hover:bg-slate-800 text-white pl-6 pr-4 py-3.5 rounded-full text-base font-bold transition-all shadow-md group"
+                  className="inline-flex items-center justify-center gap-3 btn-colorful pl-6 pr-4 py-3.5 rounded-full text-base font-bold transition-all hover:scale-[1.02] group"
                 >
                   <span>Let's! Talk about You</span>
-                  <div className="bg-yellow-400 text-slate-900 p-2 rounded-full transition-transform group-hover:translate-x-1 group-hover:-translate-y-0.5">
+                  <div className="bg-white/20 text-white p-2 rounded-full transition-transform group-hover:translate-x-1 group-hover:-translate-y-0.5">
                     <ArrowUpRight size={18} className="stroke-[3]" />
                   </div>
                 </Link>
                 <Link
                   to="/startup-partnership"
-                  className="inline-flex items-center justify-center bg-slate-50 hover:bg-slate-100 text-slate-800 px-8 py-4 rounded-full text-base font-bold transition-all text-center"
+                  className="inline-flex items-center justify-center bg-slate-50 hover:bg-slate-100 text-slate-800 border border-slate-200 px-8 py-4 rounded-full text-base font-bold transition-all hover:scale-[1.02] text-center"
                 >
                   Start Your Project
                 </Link>
@@ -158,7 +158,7 @@ const Home = () => {
             {/* Hero Interactive Stickers Column */}
             <div className="relative flex justify-center items-center lg:mt-0 mt-12 w-full max-w-[540px] mx-auto aspect-[5/4] sm:aspect-square">
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-accent/10 rounded-3xl filter blur-3xl transform rotate-3 scale-95 -z-10" />
-              
+
               {/* Central vector team/tech line art SVG */}
               <div className="w-full h-full flex items-center justify-center p-8 select-none">
                 <svg viewBox="0 0 500 400" className="w-full h-auto text-primary" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -192,11 +192,11 @@ const Home = () => {
                   <circle cx="320" cy="180" r="16" stroke="#D97706" strokeWidth="2" strokeOpacity="0.3" />
                   <circle cx="440" cy="80" r="8" fill="#0F172A" />
                   <circle cx="440" cy="80" r="16" stroke="#0F172A" strokeWidth="2" strokeOpacity="0.3" />
-                  
+
                   {/* Founder abstract outline */}
                   <circle cx="160" cy="200" r="25" stroke="#475569" strokeWidth="2" fill="white" />
                   <path d="M 125,260 C 125,235 145,225 160,225 C 175,225 195,235 195,260" stroke="#475569" strokeWidth="2" fill="white" />
-                  
+
                   {/* Builder abstract outline */}
                   <circle cx="250" cy="160" r="30" stroke="#15803D" strokeWidth="2.5" fill="white" />
                   <path d="M 205,235 C 205,200 230,190 250,190 C 270,190 295,200 295,235" stroke="#15803D" strokeWidth="2.5" fill="white" />
@@ -205,7 +205,7 @@ const Home = () => {
                   {/* Marketer abstract outline */}
                   <circle cx="340" cy="210" r="22" stroke="#D97706" strokeWidth="2" fill="white" />
                   <path d="M 310,265 C 310,242 328,232 340,232 C 352,232 370,242 370,265" stroke="#D97706" strokeWidth="2" fill="white" />
- 
+
                   {/* Widget 1: Analytics */}
                   <g transform="translate(360, 260)">
                     <rect x="0" y="0" width="80" height="60" rx="8" stroke="#E2E8F0" strokeWidth="1" fill="white" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.03))" />
@@ -214,7 +214,7 @@ const Home = () => {
                     <rect x="44" y="10" width="10" height="40" rx="1.5" fill="#0F172A" />
                     <rect x="60" y="25" width="10" height="25" rx="1.5" fill="#16A34A" />
                   </g>
- 
+
                   {/* Widget 2: Code Window */}
                   <g transform="translate(50, 75)">
                     <rect x="0" y="0" width="110" height="70" rx="8" stroke="#E2E8F0" strokeWidth="1" fill="white" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.03))" />
@@ -223,7 +223,7 @@ const Home = () => {
                     <circle cx="32" cy="12" r="3" fill="#15803D" />
                     <path d="M 12,30 L 50,30 M 12,42 L 85,42 M 12,54 L 65,54" stroke="#94A3B8" strokeWidth="2" strokeLinecap="round" />
                   </g>
- 
+
                   {/* Widget 3: Rocket */}
                   <g transform="translate(225, 60)">
                     <path d="M25 0 C25 0 35 15 35 25 C35 35 30 40 25 40 C20 40 15 35 15 25 C15 15 25 0 25 0 Z" fill="url(#grad2)" stroke="#15803D" strokeWidth="1.5" />
@@ -331,9 +331,9 @@ const Home = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((s, idx) => (
-              <div key={idx} className="premium-card p-8 rounded-2xl bg-white flex flex-col justify-between">
+              <div key={idx} className="premium-card p-8 rounded-2xl bg-white flex flex-col justify-between hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
                 <div className="space-y-6">
-                  <div className="w-14 h-14 rounded-2xl overflow-hidden flex items-center justify-center bg-primary/10">
+                  <div className="w-14 h-14 rounded-2xl overflow-hidden flex items-center justify-center bg-primary/10 group-hover:scale-105 transition-transform duration-300">
                     <img src={s.icon} alt={s.title} className="w-10 h-10 object-contain" />
                   </div>
                   <div className="space-y-2 text-left">
@@ -341,9 +341,9 @@ const Home = () => {
                     <p className="text-sm text-slate-500 leading-relaxed">{s.desc}</p>
                   </div>
                 </div>
-                <div className="pt-6 text-left">
-                  <Link to={s.link} className="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:text-primary-dark">
-                    <span>Explore details</span>
+                <div className="pt-6">
+                  <Link to={s.link} className="w-full inline-flex justify-center items-center gap-1.5 py-2.5 btn-colorful rounded-xl text-xs font-bold transition-all shadow-sm hover:scale-[1.02]">
+                    <span>Explore Details</span>
                     <ArrowRight size={12} />
                   </Link>
                 </div>
@@ -389,8 +389,8 @@ const Home = () => {
       </section>
 
       {/* Startup Growth Process */}
-      <section className="py-20 bg-bgSec">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-bgSec relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl sm:text-4xl font-extrabold text-secondary tracking-tight">
               Our Growth Process
@@ -399,14 +399,44 @@ const Home = () => {
               A systematic framework to launch products in fast cycles and limit capital risk.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative mt-12">
+            {/* Desktop horizontal connection line */}
+            <div className="hidden lg:block absolute top-1/2 left-4 right-4 h-0.5 bg-gradient-to-r from-primary/25 via-accent/25 to-emerald-500/25 -translate-y-12 z-0 animate-pulse" />
+
             {steps.map((st, idx) => (
-              <div key={idx} className="relative bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-all text-left">
-                <div className="text-xs font-black text-primary/45 uppercase tracking-widest mb-4">
-                  Step {st.step}
+              <div
+                key={idx}
+                className="group relative bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 text-left border border-slate-100/80 overflow-hidden z-10 flex flex-col justify-between min-h-[240px]"
+              >
+                {/* Background Watermark Number */}
+                <div className="absolute right-4 bottom-2 text-8xl font-black text-slate-100/60 select-none pointer-events-none group-hover:text-primary/5 transition-colors duration-500">
+                  {st.step}
                 </div>
-                <h3 className="text-lg font-bold text-secondary mb-2">{st.title}</h3>
-                <p className="text-sm text-slate-500 leading-relaxed">{st.desc}</p>
+
+                <div className="relative space-y-6">
+                  {/* Step Icon Badge */}
+                  <div className="flex justify-between items-center">
+                    <div className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform duration-300">
+                      {st.icon}
+                    </div>
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 bg-slate-100 px-2.5 py-1 rounded-full group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                      Phase {st.step}
+                    </span>
+                  </div>
+
+                  {/* Title and Description */}
+                  <div className="space-y-2">
+                    <h3 className="text-lg font-bold text-secondary group-hover:text-primary transition-colors duration-300">
+                      {st.title}
+                    </h3>
+                    <p className="text-xs text-slate-500 leading-relaxed pr-2">
+                      {st.desc}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Subtle bottom accent line that slides in on hover */}
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
               </div>
             ))}
           </div>
@@ -414,101 +444,7 @@ const Home = () => {
       </section>
 
 
-      {/* Featured Case Studies / Portfolio */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12 gap-4">
-            <div className="text-left">
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-secondary tracking-tight">
-                Featured Success Stories
-              </h2>
-              <p className="text-slate-600 mt-2">
-                Discover how we help ventures validate core technology and scale revenue.
-              </p>
-            </div>
-            <Link to="/portfolio" className="inline-flex items-center gap-1 text-sm font-bold text-primary hover:text-primary-dark">
-              <span>View all projects</span>
-              <ArrowRight size={16} />
-            </Link>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {projects.length > 0 ? (
-              projects.map((proj) => (
-                <div key={proj._id || proj.id} className="premium-card rounded-2xl overflow-hidden bg-white">
-                  <div className="h-48 overflow-hidden bg-slate-100 relative">
-                    <img
-                      src={proj.screenshots?.[0] || '/images/project_saas.svg'}
-                      alt={proj.title}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute top-4 left-4 bg-white/95 backdrop-blur px-2.5 py-1 rounded-full text-xs font-bold text-slate-800">
-                      {proj.category}
-                    </div>
-                  </div>
-                  <div className="p-6 text-left space-y-4">
-                    <h3 className="text-xl font-bold text-secondary line-clamp-1">{proj.title}</h3>
-                    <p className="text-sm text-slate-500 line-clamp-2">{proj.description}</p>
-                    <div className="flex flex-wrap gap-1.5 pt-2">
-                      {proj.technologyStack?.slice(0, 3).map((tech, i) => (
-                        <span key={i} className="text-[10px] bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full font-medium">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="border-t border-slate-100 pt-4 flex justify-between items-center">
-                      <Link
-                        to={`/portfolio`}
-                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary"
-                      >
-                        <span>Read Case Study</span>
-                        <ChevronRight size={14} />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ))
-            ) : (
-              // If none, show our mock vector showcases
-              <>
-                <div className="premium-card rounded-2xl overflow-hidden bg-white">
-                  <img src="/images/project_saas.svg" alt="SaaS" className="h-48 w-full object-cover bg-slate-50/50" />
-                  <div className="p-6 text-left space-y-4">
-                    <h3 className="text-xl font-bold text-secondary">AeroPay Financial</h3>
-                    <p className="text-sm text-slate-500">Built and launched a next-gen B2B billing engine, validation prototype to series A.</p>
-                    <div className="flex gap-2">
-                      <span className="text-xs bg-slate-100 px-2.5 py-1 rounded-full text-slate-600 font-medium">React</span>
-                      <span className="text-xs bg-slate-100 px-2.5 py-1 rounded-full text-slate-600 font-medium">Tailwind</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="premium-card rounded-2xl overflow-hidden bg-white">
-                  <img src="/images/project_mobile.svg" alt="Mobile App" className="h-48 w-full object-cover bg-slate-50/50" />
-                  <div className="p-6 text-left space-y-4">
-                    <h3 className="text-xl font-bold text-secondary">Fittr Coach</h3>
-                    <p className="text-sm text-slate-500">Cross-platform mobile app incorporating automation booking rules and dynamic payments.</p>
-                    <div className="flex gap-2">
-                      <span className="text-xs bg-slate-100 px-2.5 py-1 rounded-full text-slate-600 font-medium">React Native</span>
-                      <span className="text-xs bg-slate-100 px-2.5 py-1 rounded-full text-slate-600 font-medium">Express</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="premium-card rounded-2xl overflow-hidden bg-white">
-                  <img src="/images/project_ai.svg" alt="AI Analytics" className="h-48 w-full object-cover bg-slate-50/50" />
-                  <div className="p-6 text-left space-y-4">
-                    <h3 className="text-xl font-bold text-secondary">Holo Neural AI</h3>
-                    <p className="text-sm text-slate-500">Enterprise dashboard linking real-time analytics to automated marketing channels.</p>
-                    <div className="flex gap-2">
-                      <span className="text-xs bg-slate-100 px-2.5 py-1 rounded-full text-slate-600 font-medium">Node</span>
-                      <span className="text-xs bg-slate-100 px-2.5 py-1 rounded-full text-slate-600 font-medium">MongoDB</span>
-                    </div>
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
-        </div>
-      </section>
 
       {/* Industries We Serve */}
       <section className="py-20 bg-bgSec">
@@ -528,65 +464,6 @@ const Home = () => {
                 <ChevronRight size={16} className="text-slate-400 shrink-0 ml-2" />
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-
-      {/* Team Section */}
-      <section className="py-20 bg-bgSec">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-secondary tracking-tight">
-              Our Leadership Team
-            </h2>
-            <p className="text-slate-600 mt-4">
-              Experienced venture builders, engineers, and growth executives committed to scaling portfolios.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {team.length > 0 ? (
-              team.map((member) => (
-                <div key={member._id || member.id} className="premium-card p-6 bg-white rounded-2xl text-center">
-                  <img
-                    src={member.image || '/images/team1.svg'}
-                    alt={member.name}
-                    className="w-24 h-24 rounded-full mx-auto object-cover shadow-sm"
-                  />
-                  <h3 className="text-lg font-bold text-secondary mt-4">{member.name}</h3>
-                  <p className="text-xs text-primary font-semibold uppercase tracking-wider">{member.role}</p>
-                  <p className="text-xs text-slate-500 mt-3 line-clamp-2">{member.bio || 'Co-building portfolios'}</p>
-                </div>
-              ))
-            ) : (
-              // Seeding default placeholders
-              <>
-                <div className="premium-card p-6 bg-white rounded-2xl text-center">
-                  <img src="/images/team1.svg" alt="CEO" className="w-24 h-24 rounded-full mx-auto shadow-sm" />
-                  <h3 className="text-lg font-bold text-secondary mt-4">Amit Verma</h3>
-                  <p className="text-xs text-primary font-semibold uppercase tracking-wider">Managing Partner & CEO</p>
-                  <p className="text-xs text-slate-500 mt-3 line-clamp-2">Venture strategist with 12+ years experience in tech building and business development.</p>
-                </div>
-                <div className="premium-card p-6 bg-white rounded-2xl text-center">
-                  <img src="/images/team2.svg" alt="CTO" className="w-24 h-24 rounded-full mx-auto shadow-sm" />
-                  <h3 className="text-lg font-bold text-secondary mt-4">Vikram Sen</h3>
-                  <p className="text-xs text-primary font-semibold uppercase tracking-wider">Chief Technology Officer</p>
-                  <p className="text-xs text-slate-500 mt-3 line-clamp-2">Ex-Silicon Valley software engineer. Specialist in high-performance cloud databases and SaaS systems.</p>
-                </div>
-                <div className="premium-card p-6 bg-white rounded-2xl text-center">
-                  <img src="/images/team3.svg" alt="CMO" className="w-24 h-24 rounded-full mx-auto shadow-sm" />
-                  <h3 className="text-lg font-bold text-secondary mt-4">Neha Mehta</h3>
-                  <p className="text-xs text-primary font-semibold uppercase tracking-wider">Head of Growth Marketing</p>
-                  <p className="text-xs text-slate-500 mt-3 line-clamp-2">Performance marketer specializing in high ROI lead gen, search optimization and viral brand design.</p>
-                </div>
-                <div className="premium-card p-6 bg-white rounded-2xl text-center">
-                  <img src="/images/team4.svg" alt="PM" className="w-24 h-24 rounded-full mx-auto shadow-sm" />
-                  <h3 className="text-lg font-bold text-secondary mt-4">Sanjay Patel</h3>
-                  <p className="text-xs text-primary font-semibold uppercase tracking-wider">Head of Product Delivery</p>
-                  <p className="text-xs text-slate-500 mt-3 line-clamp-2">Agile operations and product manager. Over 50 MVPs delivered on schedule.</p>
-                </div>
-              </>
-            )}
           </div>
         </div>
       </section>
@@ -615,7 +492,7 @@ const Home = () => {
                 <article key={blog._id || blog.id} className="premium-card rounded-2xl overflow-hidden bg-white">
                   <div className="h-48 overflow-hidden bg-slate-100">
                     <img
-                      src={blog.featuredImage || '/images/blog1.svg'}
+                      src={blog.featuredImage || '/images/web_saas_marketing.png'}
                       alt={blog.title}
                       className="w-full h-full object-cover"
                     />
@@ -643,7 +520,7 @@ const Home = () => {
               // Seed default blog items
               <>
                 <article className="premium-card rounded-2xl overflow-hidden bg-white">
-                  <img src="/images/blog1.svg" alt="Blog 1" className="h-48 w-full object-cover" />
+                  <img src="/images/web_saas_marketing.png" alt="Blog 1" className="h-48 w-full object-cover" />
                   <div className="p-6 text-left space-y-4">
                     <div className="text-xs text-slate-400">Venture Building</div>
                     <h3 className="text-lg font-bold text-secondary"><Link to="/blog font-bold">How to Validate a Startup Idea with Minimal Capital</Link></h3>
@@ -651,7 +528,7 @@ const Home = () => {
                   </div>
                 </article>
                 <article className="premium-card rounded-2xl overflow-hidden bg-white">
-                  <img src="/images/blog2.svg" alt="Blog 2" className="h-48 w-full object-cover" />
+                  <img src="/images/web_saas_project_management.png" alt="Blog 2" className="h-48 w-full object-cover" />
                   <div className="p-6 text-left space-y-4">
                     <div className="text-xs text-slate-400">AI & Automation</div>
                     <h3 className="text-lg font-bold text-secondary"><Link to="/blog font-bold">AI Automation for Business Operations</Link></h3>
@@ -659,7 +536,7 @@ const Home = () => {
                   </div>
                 </article>
                 <article className="premium-card rounded-2xl overflow-hidden bg-white">
-                  <img src="/images/blog3.svg" alt="Blog 3" className="h-48 w-full object-cover" />
+                  <img src="/images/web_saas_analytics.png" alt="Blog 3" className="h-48 w-full object-cover" />
                   <div className="p-6 text-left space-y-4">
                     <div className="text-xs text-slate-400">Growth Marketing</div>
                     <h3 className="text-lg font-bold text-secondary"><Link to="/blog font-bold">Performance Marketing Playbook for MVPs</Link></h3>
@@ -762,7 +639,7 @@ const Home = () => {
             />
             <button
               type="submit"
-              className="bg-primary hover:bg-primary-dark text-white font-bold py-3 px-6 rounded-xl text-sm transition-all flex items-center justify-center gap-1.5 shadow-md shadow-primary/10"
+              className="btn-colorful font-bold py-3 px-6 rounded-xl text-sm transition-all flex items-center justify-center gap-1.5 hover:scale-[1.02]"
             >
               <span>Subscribe</span>
             </button>

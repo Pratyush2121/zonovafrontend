@@ -83,8 +83,23 @@ const BookMeeting = () => {
     <div className="bg-white">
       <SEO title="Book a Meeting" description="Schedule a strategy session call with the venture consulting team at Zonova Technologies." />
 
-      <section className="bg-bgSec py-16 border-b border-slate-100">
-        <div className="max-w-4xl mx-auto px-4 text-center space-y-4">
+      <section className="relative overflow-hidden bg-bgSec py-16 border-b border-slate-100">
+        {/* Floating stickers */}
+        <div className="absolute top-[15%] left-[5%] animate-float-slow hidden md:block">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-extrabold shadow-sm select-none">
+            📅 Schedule Zoom
+          </span>
+        </div>
+        <div className="absolute bottom-[15%] right-[5%] animate-float-fast hidden md:block">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cyan-50 border border-cyan-100 text-cyan-700 text-xs font-extrabold shadow-sm select-none">
+            📈 Growth Strategy
+          </span>
+        </div>
+
+        <div className="max-w-4xl mx-auto px-4 text-center space-y-4 relative z-10">
+          <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-2 text-primary">
+            <Video size={24} />
+          </div>
           <h1 className="text-4xl sm:text-5xl font-black text-secondary tracking-tight">
             Schedule a Strategy Call
           </h1>
@@ -109,7 +124,7 @@ const BookMeeting = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
             
             {/* Form & Scheduler (Left 2 cols) */}
-            <div className="lg:col-span-2 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm text-left">
+            <div className="lg:col-span-2 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm text-left hover:border-primary/30 transition-all duration-300">
               <form onSubmit={handleSubmit} className="space-y-6">
                 
                 {error && (
@@ -255,7 +270,7 @@ const BookMeeting = () => {
 
             {/* Sidebar Details (Right 1 col) */}
             <div className="space-y-6 text-left lg:sticky lg:top-24">
-              <div className="p-6 rounded-3xl border border-slate-200 space-y-4 bg-slate-50/50">
+              <div className="p-6 rounded-3xl border border-slate-200 hover:border-primary/30 transition-all duration-300 space-y-4 bg-slate-50/50">
                 <h4 className="font-extrabold text-sm text-secondary uppercase tracking-widest">Meeting Details</h4>
                 <div className="space-y-3 text-sm text-slate-600">
                   <div className="flex gap-2 items-center">
@@ -269,7 +284,7 @@ const BookMeeting = () => {
                 </div>
               </div>
 
-              <div className="p-6 rounded-3xl border border-slate-200 bg-primary/10 border-primary/20 space-y-2">
+              <div className="p-6 rounded-3xl border border-primary/20 bg-primary/10 hover:border-primary/40 transition-all duration-300 space-y-2">
                 <h4 className="font-bold text-sm text-primary">Strategy Briefing</h4>
                 <p className="text-xs text-slate-500 leading-relaxed">
                   During this briefing, we will stress-test your idea stages, analyze target channels, and map out a structured developmental roadmap proposal.

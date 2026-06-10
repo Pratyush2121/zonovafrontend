@@ -8,21 +8,21 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#475569',
-          dark: '#334155',
-          light: '#64748B',
+          DEFAULT: '#6366F1',
+          dark: '#4F46E5',
+          light: '#818CF8',
         },
         secondary: {
-          DEFAULT: '#1E293B',
-          dark: '#0F172A',
-          light: '#334155',
+          DEFAULT: '#0F172A',
+          dark: '#020617',
+          light: '#1E293B',
         },
         accent: {
-          DEFAULT: '#64748B',
-          dark: '#475569',
-          light: '#94A3B8',
+          DEFAULT: '#06B6D4',
+          dark: '#0891B2',
+          light: '#22D3EE',
         },
-        bgSec: '#FFF9F6',
+        bgSec: '#F1F5F9',
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],

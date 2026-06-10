@@ -1,9 +1,53 @@
-import React, { useState } from 'react';
-import { Briefcase, MapPin, Clock, DollarSign, Upload, Check } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Briefcase, MapPin, Clock, DollarSign, Upload, Check, Users } from 'lucide-react';
 import SEO from '../components/SEO';
 import Spinner from '../components/Spinner';
 
+const defaultJobs = [
+  {
+    id: 'job-1',
+    title: 'Senior MERN Developer',
+    location: 'Mumbai, India (Hybrid)',
+    type: 'Full-Time',
+    salary: '₹12L - ₹18L per annum',
+    desc: 'We are seeking a senior full-stack engineer to lead development of MVP prototypes and SaaS dashboard products. You will define engineering architectures, write clean APIs, and sync localized databases.',
+    requirements: [
+      '5+ years experience in React, Node.js, Express, and MongoDB.',
+      'Expertise in Redux, Tailwind CSS, and cloud hosting APIs.',
+      'Proven track record of building and launching functional software products.'
+    ]
+  },
+  {
+    id: 'job-2',
+    title: 'Growth Product Manager',
+    location: 'Remote, India',
+    type: 'Full-Time',
+    salary: '₹8L - ₹14L per annum',
+    desc: 'Looking for a product manager with growth marketing DNA. You will consult founders on MVP roadmap validation, write sprint stories, and track product analytics conversion loops.',
+    requirements: [
+      '3+ years experience managing SaaS or mobile app life-cycles.',
+      'Deep understanding of Mixpanel, Google Analytics, and A/B sprint loops.',
+      'Excellent customer validation and pitch consulting communication.'
+    ]
+  },
+  {
+    id: 'job-3',
+    title: 'Performance Marketing Lead',
+    location: 'Mumbai, India (Hybrid)',
+    type: 'Full-Time',
+    salary: '₹6L - ₹10L per annum',
+    desc: 'Seeking a performance marketer to manage client customer acquisition channels. You will set up targeted ad funnels on Meta and Google, test ad copies, and audit CTR reporting metrics.',
+    requirements: [
+      '2+ years structuring positive ROI digital advertising campaigns.',
+      'Expertise in lead generation lists, landing page opt-ins, and bid optimization.',
+      'Strong analytical skills to interpret cost-per-lead margins.'
+    ]
+  }
+];
+
 const Careers = () => {
+  const [openPositions, setOpenPositions] = useState([]);
+  const [jobsLoading, setJobsLoading] = useState(true);
   const [activeJob, setActiveJob] = useState(null);
   const [formData, setFormData] = useState({
     fullName: '',
@@ -18,47 +62,25 @@ const Careers = () => {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
 
-  const openPositions = [
-    {
-      id: 'job-1',
-      title: 'Senior MERN Developer',
-      location: 'Mumbai, India (Hybrid)',
-      type: 'Full-Time',
-      salary: '₹12L - ₹18L per annum',
-      desc: 'We are seeking a senior full-stack engineer to lead development of MVP prototypes and SaaS dashboard products. You will define engineering architectures, write clean APIs, and sync localized databases.',
-      requirements: [
-        '5+ years experience in React, Node.js, Express, and MongoDB.',
-        'Expertise in Redux, Tailwind CSS, and cloud hosting APIs.',
-        'Proven track record of building and launching functional software products.'
-      ]
-    },
-    {
-      id: 'job-2',
-      title: 'Growth Product Manager',
-      location: 'Remote, India',
-      type: 'Full-Time',
-      salary: '₹8L - ₹14L per annum',
-      desc: 'Looking for a product manager with growth marketing DNA. You will consult founders on MVP roadmap validation, write sprint stories, and track product analytics conversion loops.',
-      requirements: [
-        '3+ years experience managing SaaS or mobile app life-cycles.',
-        'Deep understanding of Mixpanel, Google Analytics, and A/B sprint loops.',
-        'Excellent customer validation and pitch consulting communication.'
-      ]
-    },
-    {
-      id: 'job-3',
-      title: 'Performance Marketing Lead',
-      location: 'Mumbai, India (Hybrid)',
-      type: 'Full-Time',
-      salary: '₹6L - ₹10L per annum',
-      desc: 'Seeking a performance marketer to manage client customer acquisition channels. You will set up targeted ad funnels on Meta and Google, test ad copies, and audit CTR reporting metrics.',
-      requirements: [
-        '2+ years structuring positive ROI digital advertising campaigns.',
-        'Expertise in lead generation lists, landing page opt-ins, and bid optimization.',
-        'Strong analytical skills to interpret cost-per-lead margins.'
-      ]
-    }
-  ];
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const res = await fetch('/api/jobs');
+        const data = await res.json();
+        if (data.success && data.jobs && data.jobs.length > 0) {
+          setOpenPositions(data.jobs);
+        } else {
+          setOpenPositions(defaultJobs);
+        }
+      } catch (err) {
+        console.error('Failed to fetch jobs:', err);
+        setOpenPositions(defaultJobs);
+      } finally {
+        setJobsLoading(false);
+      }
+    };
+    fetchJobs();
+  }, []);
 
   const handleTextChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -115,8 +137,23 @@ const Careers = () => {
     <div className="bg-white">
       <SEO title="Careers" description="Join the venture studio crew at Zonova Technologies. Explore our open positions for software engineers, product managers and marketing leads." />
 
-      <section className="bg-bgSec py-16 border-b border-slate-100">
-        <div className="max-w-4xl mx-auto px-4 text-center space-y-4">
+      <section className="relative overflow-hidden bg-bgSec py-16 border-b border-slate-100">
+        {/* Floating stickers */}
+        <div className="absolute top-[15%] left-[5%] animate-float-slow hidden md:block">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-extrabold shadow-sm select-none">
+            💼 Crew Openings
+          </span>
+        </div>
+        <div className="absolute bottom-[15%] right-[5%] animate-float-fast hidden md:block">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cyan-50 border border-cyan-100 text-cyan-700 text-xs font-extrabold shadow-sm select-none">
+            🚀 MERN Stack
+          </span>
+        </div>
+
+        <div className="max-w-4xl mx-auto px-4 text-center space-y-4 relative z-10">
+          <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-2 text-primary">
+            <Users size={24} />
+          </div>
           <h1 className="text-4xl sm:text-5xl font-black text-secondary tracking-tight">
             Join the Crew
           </h1>
@@ -133,46 +170,53 @@ const Careers = () => {
           {/* Open Jobs list */}
           <div className="space-y-6 text-left">
             <h2 className="text-3xl font-extrabold text-secondary tracking-tight">Open Positions</h2>
-            <div className="space-y-4 pt-2">
-              {openPositions.map((job) => (
-                <div 
-                  key={job.id} 
-                  className={`p-6 border rounded-2xl transition-all cursor-pointer ${
-                    activeJob?.id === job.id ? 'border-primary bg-primary/10 shadow-sm' : 'border-slate-200 hover:border-slate-300'
-                  }`}
-                  onClick={() => setActiveJob(job)}
-                >
-                  <h3 className="font-extrabold text-xl text-secondary">{job.title}</h3>
-                  <div className="flex flex-wrap gap-4 text-slate-400 text-xs mt-2 font-medium">
-                    <span className="flex items-center gap-1"><MapPin size={13} /> {job.location}</span>
-                    <span className="flex items-center gap-1"><Clock size={13} /> {job.type}</span>
-                    <span className="flex items-center gap-1"><DollarSign size={13} /> {job.salary}</span>
-                  </div>
-                  {activeJob?.id === job.id && (
-                    <div className="mt-4 pt-4 border-t border-slate-200/50 space-y-4 animate-fade-in text-sm">
-                      <p className="text-slate-600 leading-relaxed">{job.desc}</p>
-                      <div>
-                        <h4 className="font-bold text-secondary mb-1">Key Requirements:</h4>
-                        <ul className="list-disc list-inside text-slate-500 space-y-1">
-                          {job.requirements.map((req, i) => <li key={i}>{req}</li>)}
-                        </ul>
+            {jobsLoading ? (
+              <div className="py-8"><Spinner /></div>
+            ) : (
+              <div className="space-y-4 pt-2">
+                {openPositions.map((job) => {
+                  const isActive = activeJob && (activeJob._id === job._id || activeJob.id === job.id);
+                  return (
+                    <div 
+                      key={job._id || job.id} 
+                      className={`p-6 border rounded-2xl transition-all duration-300 cursor-pointer ${
+                        isActive ? 'border-primary bg-primary/10 shadow-sm' : 'border-slate-200 hover:border-primary/30 shadow-sm'
+                      }`}
+                      onClick={() => setActiveJob(job)}
+                    >
+                      <h3 className="font-extrabold text-xl text-secondary">{job.title}</h3>
+                      <div className="flex flex-wrap gap-4 text-slate-400 text-xs mt-2 font-medium">
+                        <span className="flex items-center gap-1"><MapPin size={13} /> {job.location}</span>
+                        <span className="flex items-center gap-1"><Clock size={13} /> {job.type}</span>
+                        <span className="flex items-center gap-1"><DollarSign size={13} /> {job.salary}</span>
                       </div>
-                      <button
-                        type="button"
-                        onClick={() => handleApplyClick(job)}
-                        className="bg-primary hover:bg-primary-dark text-white px-5 py-2.5 rounded-lg text-xs font-bold shadow-md shadow-primary/10 transition-all"
-                      >
-                        Apply For This Role
-                      </button>
+                      {isActive && (
+                        <div className="mt-4 pt-4 border-t border-slate-200/50 space-y-4 animate-fade-in text-sm">
+                          <p className="text-slate-600 leading-relaxed">{job.desc}</p>
+                          <div>
+                            <h4 className="font-bold text-secondary mb-1">Key Requirements:</h4>
+                            <ul className="list-disc list-inside text-slate-500 space-y-1">
+                              {job.requirements?.map((req, i) => <li key={i}>{req}</li>)}
+                            </ul>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => handleApplyClick(job)}
+                            className="bg-primary hover:bg-primary-dark text-white px-5 py-2.5 rounded-lg text-xs font-bold shadow-md shadow-primary/10 transition-all"
+                          >
+                            Apply For This Role
+                          </button>
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-              ))}
-            </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           {/* Form Application Section */}
-          <div id="apply-form-section" className="text-left bg-slate-50 p-8 rounded-3xl border border-slate-100 shadow-sm">
+          <div id="apply-form-section" className="text-left bg-slate-50 p-8 rounded-3xl border border-slate-200 hover:border-primary/30 transition-all duration-300 shadow-sm">
             <h3 className="font-extrabold text-2xl text-secondary mb-2">Apply Online</h3>
             <p className="text-xs text-slate-500 mb-6">Submit your candidate profile directly. We read every resume cover letter.</p>
 
@@ -204,7 +248,7 @@ const Careers = () => {
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-primary text-sm shadow-sm bg-white"
                   >
                     <option value="">Select a position...</option>
-                    {openPositions.map((job) => <option key={job.id} value={job.title}>{job.title}</option>)}
+                    {openPositions.map((job) => <option key={job._id || job.id} value={job.title}>{job.title}</option>)}
                     <option value="General Application">General Application</option>
                   </select>
                 </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShieldCheck, HelpCircle, ArrowLeft, ArrowRight, Check } from 'lucide-react';
+import { ShieldCheck, HelpCircle, ArrowLeft, ArrowRight, Check, Briefcase } from 'lucide-react';
 import SEO from '../components/SEO';
 import Spinner from '../components/Spinner';
 
@@ -112,8 +112,23 @@ const StartupPartnership = () => {
     <div className="bg-white">
       <SEO title="Startup Partnership Program" description="Apply for Zonova Technologies startup support, venture design, and co-building partner services." />
 
-      <section className="bg-bgSec py-16 border-b border-slate-100">
-        <div className="max-w-4xl mx-auto px-4 text-center space-y-4">
+      <section className="relative overflow-hidden bg-bgSec py-16 border-b border-slate-100">
+        {/* Floating stickers */}
+        <div className="absolute top-[15%] left-[5%] animate-float-slow hidden md:block">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-extrabold shadow-sm select-none">
+            🤝 Co-Investment
+          </span>
+        </div>
+        <div className="absolute bottom-[15%] right-[5%] animate-float-fast hidden md:block">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-extrabold shadow-sm select-none">
+            🚀 SaaS Scaling
+          </span>
+        </div>
+
+        <div className="max-w-4xl mx-auto px-4 text-center space-y-4 relative z-10">
+          <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-2 text-primary">
+            <Briefcase size={24} />
+          </div>
           <h1 className="text-4xl sm:text-5xl font-black text-secondary tracking-tight">
             Startup Partnership Program
           </h1>
@@ -135,7 +150,7 @@ const StartupPartnership = () => {
             </p>
           </div>
         ) : (
-          <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
+          <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm hover:border-primary/30 transition-all duration-300">
             {/* Steps Visual Progress */}
             <div className="flex items-center justify-between mb-8">
               {[1, 2, 3, 4].map((s) => (
