@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" fill="none">
+  <rect width="200" height="200" rx="24" fill="#FDF2F8"/>
+  <!-- Megaphone / Funnel -->
+  <path d="M60 80 L110 50 V150 L60 120 Z" fill="#FBCFE8" stroke="#EC4899" stroke-width="2"/>
+  <rect x="50" y="90" width="10" height="20" rx="2" fill="#EC4899"/>
+  <path d="M125 70 Q145 100 125 130" stroke="#EC4899" stroke-width="3" stroke-linecap="round"/>
+  <path d="M135 60 Q165 100 135 140" stroke="#EC4899" stroke-width="3" stroke-linecap="round"/>
+</svg>

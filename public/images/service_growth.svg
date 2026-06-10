@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" fill="none">
+  <rect width="200" height="200" rx="24" fill="#ECFDF5"/>
+  <!-- Rising Chart Line & Bars -->
+  <rect x="60" y="110" width="16" height="40" rx="4" fill="#A7F3D0"/>
+  <rect x="92" y="80" width="16" height="70" rx="4" fill="#34D399"/>
+  <rect x="124" y="50" width="16" height="100" rx="4" fill="#10B981"/>
+  <path d="M50 130 L90 95 L130 65 L150 45" stroke="#047857" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="150" cy="45" r="6" fill="#047857"/>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" width="150" height="150">
+  <defs>
+    <linearGradient id="avatarGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#C084FC"/>
+    </linearGradient>
+  </defs>
+  <circle cx="75" cy="75" r="70" fill="url(#avatarGrad2)"/>
+  <!-- User Figure Silhouette -->
+  <path d="M75 35 C60 35 50 47 50 62 C50 77 60 85 75 85 C90 85 100 77 100 62 C100 47 90 35 75 35 Z" fill="#FFFFFF"/>
+  <path d="M28 120 C28 102 48 95 75 95 C102 95 122 102 122 120 C122 123 120 135 110 135 L40 135 C30 135 28 123 28 120 Z" fill="#FFFFFF" fill-opacity="0.9"/>
+</svg>
