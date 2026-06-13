@@ -36,6 +36,7 @@ const AdminDashboard = () => {
   const [privacyPolicy, setPrivacyPolicy] = useState({ title: '', content: '' });
   const [termsPolicy, setTermsPolicy] = useState({ title: '', content: '' });
   const [usersList, setUsersList] = useState([]);
+  const [projectsList, setProjectsList] = useState([]);
   const [blogsList, setBlogsList] = useState([]);
   const [jobsList, setJobsList] = useState([]);
   
