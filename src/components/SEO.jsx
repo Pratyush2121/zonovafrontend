@@ -26,7 +26,7 @@ const SEO = ({ title, description, keywords }) => {
     }
     metaKeywords.setAttribute(
       'content',
-      keywords || 'venture studio, startup growth partner, mvp builder, web development, mobile app development, performance marketing, business automation'
+      keywords || 'digital marketing, seo services, digital marketing agency, business growth, social media marketing, lead generation, website development, branding, online marketing, zonova technologies, venture studio, startup growth partner, mvp builder, web development, mobile app development, performance marketing, business automation'
     );
   }, [title, description, keywords]);
 

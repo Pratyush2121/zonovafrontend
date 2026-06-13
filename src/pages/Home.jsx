@@ -24,9 +24,9 @@ const Home = () => {
     const fetchHomeData = async () => {
       try {
         const [blogRes, projectRes, faqRes, testimonialRes, teamRes] = await Promise.all([
-          fetch('/api/blogs?status=published'),
-          fetch('/api/projects?featured=true'),
-          fetch('/api/faqs'),
+          fetch('/api/blogs?status=published&limit=3'),
+          fetch('/api/projects?featured=true&limit=3'),
+          fetch('/api/faqs?limit=5'),
           fetch('/api/testimonials'),
           fetch('/api/team')
         ]);

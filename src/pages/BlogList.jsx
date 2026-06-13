@@ -10,11 +10,23 @@ const BlogList = () => {
   const [category, setCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  // Reset page to 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [category, searchQuery]);
 
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const queryParams = new URLSearchParams({ status: 'published' });
+        setLoading(true);
+        const queryParams = new URLSearchParams({
+          status: 'published',
+          page: currentPage.toString(),
+          limit: '6'
+        });
         if (category !== 'All') queryParams.append('category', category);
         if (searchQuery) queryParams.append('search', searchQuery);
 
@@ -22,6 +34,11 @@ const BlogList = () => {
         const data = await res.json();
         if (data.success) {
           setBlogs(data.blogs);
+          if (data.pagination) {
+            setTotalPages(data.pagination.totalPages || 1);
+          } else {
+            setTotalPages(1);
+          }
         }
       } catch (err) {
         console.error(err);
@@ -30,16 +47,16 @@ const BlogList = () => {
       }
     };
     fetchBlogs();
-  }, [category, searchQuery]);
+  }, [category, searchQuery, currentPage]);
 
-  const categories = ['All', 'Venture Building', 'Tech & Engineering', 'AI & Automation', 'Growth Marketing'];
+  const categories = ['All', 'Website Development', 'SEO Services', 'Digital Marketing', 'Branding', 'Lead Generation'];
 
   const fallbackBlogs = [
     {
       id: 'mock-b1',
       title: 'How to Validate a Startup Idea with Minimal Capital',
       slug: 'how-to-validate-a-startup-idea',
-      category: 'Venture Building',
+      category: 'Website Development',
       readTime: '6 min read',
       featuredImage: '/images/blog1.svg',
       author: 'Amit Verma',
@@ -49,7 +66,7 @@ const BlogList = () => {
       id: 'mock-b2',
       title: 'AI Automation workflows for Business Operations',
       slug: 'ai-automation-for-businesses',
-      category: 'AI & Automation',
+      category: 'Digital Marketing',
       readTime: '8 min read',
       featuredImage: '/images/blog2.svg',
       author: 'Vikram Sen',
@@ -144,51 +161,86 @@ const BlogList = () => {
             <p className="text-sm text-slate-500 max-w-xs mx-auto">We couldn't find any articles matching your request.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {activeBlogs.map((blog) => {
-              const slug = blog.slug || '';
-              return (
-                <article key={blog._id || blog.id} className="premium-card rounded-2xl overflow-hidden bg-white border border-slate-200 hover:border-primary/30 transition-all duration-300 text-left flex flex-col justify-between">
-                  <div>
-                    {/* Header Image */}
-                    <div className="h-52 bg-slate-100 overflow-hidden">
-                      <img
-                        src={resolveUrl(blog.featuredImage) || '/images/blog1.svg'}
-                        alt={blog.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    {/* Content brief */}
-                    <div className="p-6 space-y-4">
-                      <div className="flex justify-between items-center text-xs text-slate-400 font-semibold">
-                        <span>{blog.category}</span>
-                        <div className="flex items-center gap-1">
-                          <Clock size={12} />
-                          <span>{blog.readTime || '5 min read'}</span>
-                        </div>
+          <div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {activeBlogs.map((blog) => {
+                const slug = blog.slug || '';
+                return (
+                  <article key={blog._id || blog.id} className="premium-card rounded-2xl overflow-hidden bg-white border border-slate-200 hover:border-primary/30 transition-all duration-300 text-left flex flex-col justify-between">
+                    <div>
+                      {/* Header Image */}
+                      <div className="h-52 bg-slate-100 overflow-hidden">
+                        <img
+                          src={resolveUrl(blog.featuredImage) || '/images/blog1.svg'}
+                          alt={blog.title}
+                          className="w-full h-full object-cover"
+                        />
                       </div>
-                      <h3 className="text-xl font-bold text-secondary line-clamp-2 hover:text-primary transition-colors">
-                        <Link to={`/blog/${slug}`}>{blog.title}</Link>
-                      </h3>
-                      <p className="text-sm text-slate-500 line-clamp-2">
-                        {blog.metaDescription}
-                      </p>
+                      {/* Content brief */}
+                      <div className="p-6 space-y-4">
+                        <div className="flex justify-between items-center text-xs text-slate-400 font-semibold">
+                          <span>{blog.category}</span>
+                          <div className="flex items-center gap-1">
+                            <Clock size={12} />
+                            <span>{blog.readTime || '5 min read'}</span>
+                          </div>
+                        </div>
+                        <h3 className="text-xl font-bold text-secondary line-clamp-2 hover:text-primary transition-colors">
+                          <Link to={`/blog/${slug}`}>{blog.title}</Link>
+                        </h3>
+                        <p className="text-sm text-slate-500 line-clamp-2">
+                          {blog.metaDescription}
+                        </p>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="p-6 border-t border-slate-100 bg-slate-50/50 flex justify-between items-center text-xs font-semibold text-slate-600">
-                    <span>By {blog.author}</span>
-                    <Link
-                      to={`/blog/${slug}`}
-                      className="text-primary flex items-center gap-1 hover:gap-1.5 transition-all"
-                    >
-                      <span>Read Full Post</span>
-                      <ChevronRight size={14} />
-                    </Link>
-                  </div>
-                </article>
-              );
-            })}
+                    <div className="p-6 border-t border-slate-100 bg-slate-50/50 flex justify-between items-center text-xs font-semibold text-slate-600">
+                      <span>By {blog.author}</span>
+                      <Link
+                        to={`/blog/${slug}`}
+                        className="text-primary flex items-center gap-1 hover:gap-1.5 transition-all"
+                      >
+                        <span>Read Full Post</span>
+                        <ChevronRight size={14} />
+                      </Link>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <div className="flex justify-center items-center gap-2 mt-12">
+                <button
+                  disabled={currentPage === 1}
+                  onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                  className="px-4 py-2 rounded-xl border border-slate-200 text-sm font-semibold hover:bg-slate-50 transition-all disabled:opacity-50 disabled:cursor-not-allowed text-slate-700"
+                >
+                  Previous
+                </button>
+                {Array.from({ length: totalPages }, (_, idx) => idx + 1).map((pageNum) => (
+                  <button
+                    key={pageNum}
+                    onClick={() => setCurrentPage(pageNum)}
+                    className={`w-10 h-10 rounded-xl text-sm font-bold transition-all ${
+                      currentPage === pageNum
+                        ? 'bg-primary text-white shadow-md'
+                        : 'border border-slate-200 text-slate-700 hover:bg-slate-50'
+                    }`}
+                  >
+                    {pageNum}
+                  </button>
+                ))}
+                <button
+                  disabled={currentPage === totalPages}
+                  onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                  className="px-4 py-2 rounded-xl border border-slate-200 text-sm font-semibold hover:bg-slate-50 transition-all disabled:opacity-50 disabled:cursor-not-allowed text-slate-700"
+                >
+                  Next
+                </button>
+              </div>
+            )}
           </div>
         )}
       </section>
