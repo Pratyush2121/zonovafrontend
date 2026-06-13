@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { ArrowRight, CheckCircle2, ChevronRight, MessageSquare, Star, ArrowUpRight, TrendingUp, Sparkles, Send, Lightbulb, Cpu, Rocket } from 'lucide-react';
+import { ArrowRight, CheckCircle2, ChevronRight, MessageSquare, Star, ArrowUpRight, TrendingUp, Sparkles, Send, Lightbulb, Cpu, Rocket, Code, BarChart, Compass } from 'lucide-react';
 import SEO from '../components/SEO';
 import Spinner from '../components/Spinner';
 import { resolveUrl } from '../utils/resolveUrl.js';
@@ -67,10 +67,20 @@ const Home = () => {
   ];
 
   const services = [
-    { title: 'Software Development', desc: 'Web Apps, Mobile Apps & Custom SaaS Platforms.', link: '/services', icon: '/images/service_tech.svg' },
-    { title: 'Performance Marketing', desc: 'Acquiring active customers, running lead ads, and scaling campaigns.', link: '/services', icon: '/images/service_marketing.svg' },
-    { title: 'Business Automation', desc: 'Streamlining operations, integrating systems, and scaling workflows.', link: '/services', icon: '/images/service_automation.svg' },
-    { title: 'Venture Consulting', desc: 'Validating business concepts, product strategy, and growth strategy.', link: '/services', icon: '/images/service_growth.svg' }
+    { 
+      title: 'Software Development', 
+      desc: 'Web Apps, Mobile Apps & Custom SaaS Platforms.', 
+      subheadings: [
+        'Web App Development',
+        'Mobile App Development',
+        'SaaS Development'
+      ],
+      link: '/services/web-development', 
+      icon: <Code className="w-7 h-7 text-primary" />
+    },
+    { title: 'Performance Marketing', desc: 'Acquiring active customers, running lead ads, and scaling campaigns.', link: '/services/performance-marketing', icon: <BarChart className="w-7 h-7 text-rose-600" /> },
+    { title: 'Business Automation', desc: 'Streamlining operations, integrating systems, and scaling workflows.', link: '/services/business-automation', icon: <Cpu className="w-7 h-7 text-emerald-600" /> },
+    { title: 'Venture Consulting', desc: 'Validating business concepts, product strategy, and growth strategy.', link: '/services/startup-consulting', icon: <Compass className="w-7 h-7 text-amber-600" /> }
   ];
 
   const steps = [
@@ -111,7 +121,7 @@ const Home = () => {
                 and Smart Solutions
               </h1>
               <p className="text-xl font-extrabold text-primary tracking-wider uppercase">
-                Digital Marketing & Website Development Agency
+                Software Development Agency & Your Growth partner
               </p>
               <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-lg">
                 Helping founders and businesses turn ambitious ideas into successful companies through technology, performance marketing, operations automation, and business design.
@@ -313,12 +323,23 @@ const Home = () => {
             {services.map((s, idx) => (
               <div key={idx} className="premium-card p-8 rounded-2xl bg-white flex flex-col justify-between hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
                 <div className="space-y-6">
-                  <div className="w-14 h-14 rounded-2xl overflow-hidden flex items-center justify-center bg-primary/10 group-hover:scale-105 transition-transform duration-300">
-                    <img src={s.icon} alt={s.title} className="w-10 h-10 object-contain" />
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-primary/10 group-hover:scale-105 transition-transform duration-300">
+                    {s.icon}
                   </div>
                   <div className="space-y-2 text-left">
                     <h3 className="text-xl font-bold text-secondary">{s.title}</h3>
-                    <p className="text-sm text-slate-500 leading-relaxed">{s.desc}</p>
+                    {s.subheadings ? (
+                      <div className="mt-3 space-y-2 pt-2 border-t border-slate-100">
+                        {s.subheadings.map((sub, sIdx) => (
+                          <div key={sIdx} className="flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                            <span className="text-xs font-bold text-slate-700">{sub}</span>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-sm text-slate-500 leading-relaxed">{s.desc}</p>
+                    )}
                   </div>
                 </div>
                 <div className="pt-6">

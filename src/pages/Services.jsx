@@ -10,96 +10,112 @@ import SEO from '../components/SEO';
 const Services = () => {
   const serviceList = [
     {
+      slug: 'startup-consulting',
       icon: <Compass size={24} className="text-primary" />,
       title: 'Startup Consulting',
       desc: 'Formulating robust business models, conducting competitive analysis, mapping unit economics, and reviewing investor pitch pitch decks.',
       features: ['Idea Stress-testing', 'Market Positioning', 'Financial Modeling']
     },
     {
+      slug: 'mvp-development',
       icon: <Code size={24} className="text-cyan-600" />,
       title: 'MVP Development',
       desc: 'Rapidly coding core validation prototypes and feature-light applications in 4-8 weeks to test client demand with minimal risk.',
       features: ['Fast Prototype Cycles', 'Core Features Focus', 'Scalable Stack Choice']
     },
     {
+      slug: 'web-development',
       icon: <Layers size={24} className="text-violet-600" />,
       title: 'Web Development',
       desc: 'Designing custom responsive corporate websites, high-conversion landing pages, portals, and complex e-commerce architectures.',
       features: ['Tailwind & React Stack', 'SEO-friendly Markup', 'Fast Load Times']
     },
     {
+      slug: 'mobile-apps',
       icon: <Smartphone size={24} className="text-emerald-600" />,
       title: 'Mobile App Development',
       desc: 'Building cross-platform iOS and Android applications with native performance, local databases, and integrated push updates.',
       features: ['React Native Apps', 'App Store Optimizations', 'Secure Offline Storage']
     },
     {
+      slug: 'saas-development',
       icon: <Database size={24} className="text-amber-600" />,
       title: 'SaaS Development',
       desc: 'Engineering multi-tenant cloud subscription platforms, complete with user hierarchies, subscription billings, and usage dashboards.',
       features: ['Stripe Bills Integrated', 'Role RBAC System', 'Cloud Database Scales']
     },
     {
+      slug: 'ai-solutions',
       icon: <Brain size={24} className="text-pink-600" />,
       title: 'AI Solutions',
       desc: 'Deploying neural networks, AI chatbots, prediction metrics, and custom generative AI interfaces that optimize operations.',
       features: ['GPT Integration', 'Custom Vector Stores', 'Predictive Analysis']
     },
     {
+      slug: 'ui-ux-design',
       icon: <Paintbrush size={24} className="text-sky-600" />,
       title: 'UI/UX Design',
       desc: 'Crafting responsive layout wireframes, high-fidelity UI user-testing mockups, custom visual styles, and user flow map strategies.',
       features: ['Figma Wireframes', 'Interactive Demos', 'User Flow Maps']
     },
     {
-      icon: <Award size={24} className="text-teal-600" />,
+      slug: 'branding',
+      icon: <Paintbrush size={24} className="text-teal-600" />,
       title: 'Branding',
       desc: 'Creating custom corporate logos, color systems, typography tokens, pitch documents, and guidelines to establish trustworthy authority.',
       features: ['Custom Brand Manual', 'Logo Architecture', 'Asset Guidelines']
     },
     {
+      slug: 'seo-services',
       icon: <Search size={24} className="text-indigo-600" />,
       title: 'SEO',
       desc: 'Optimizing technical on-page code, search engine index sitemaps, structured schema data markup, and building rank-boosting backlink plans.',
       features: ['Core Web Vitals Pass', 'Structured Schema Data', 'Domain Audit Plans']
     },
     {
+      slug: 'performance-marketing',
       icon: <BarChart size={24} className="text-rose-600" />,
       title: 'Performance Marketing',
       desc: 'Structuring targeted advertising funnels across Google Ads, Meta Ads, and LinkedIn to generate positive ROI customer acquisition.',
       features: ['High-conversion Funnels', 'A/B Ad Copies Tested', 'Direct CTR Reporting']
     },
     {
+      slug: 'lead-generation',
       icon: <UserCheck size={24} className="text-indigo-600" />,
       title: 'Lead Generation',
       desc: 'Automating high-volume outbound sequences, building email lists, and designing lead magnets to feed the active sales pipelines.',
       features: ['Cold Email Workflows', 'Opt-in Landing Pages', 'Vetted Prospect Lists']
     },
     {
+      slug: 'business-automation',
       icon: <Cpu size={24} className="text-emerald-600" />,
       title: 'Automation Solutions',
       desc: 'Connecting CRM databases, ticketing queues, accounting tools, and billing software to save internal operations hours.',
       features: ['Zapier & Make APIs', 'System Sync Schedules', 'Manual Task Removal']
     },
     {
+      slug: 'business-consulting',
       icon: <Briefcase size={24} className="text-accent" />,
       title: 'Business Consulting',
       desc: 'Evaluating operation workflows, pricing lists, customer support processes, and team organization structures to boost bottom-line margins.',
       features: ['Operation Audits', 'Pricing Tier Setup', 'Org Restructures']
     },
     {
+      slug: 'dedicated-team',
       icon: <Users2 size={24} className="text-cyan-600" />,
       title: 'Dedicated Development Team',
       desc: 'Staffing projects with seasoned full-stack engineers, QA testers, and designers working full-time directly under client control.',
       features: ['Vetted Senior Engineers', 'Daily Standup Syncs', 'Flexible Resource Scale']
     },
     {
+      slug: 'growth-consulting',
       icon: <Rocket size={24} className="text-violet-600" />,
       title: 'Growth Strategy',
       desc: 'Identifying new markets, organizing growth hacking sprints, planning viral referral loops, and expanding enterprise accounts.',
       features: ['Referral Loops Built', 'Growth Hacking Sprints', 'Account Strategy Planning']
     },
     {
+      slug: 'product-management',
       icon: <ListTodo size={24} className="text-amber-600" />,
       title: 'Product Management',
       desc: 'Organizing developmental product roadmaps, detailing sprint user stories, running agile scrums, and managing delivery timelines.',
@@ -163,10 +179,10 @@ const Services = () => {
               
               <div className="pt-6">
                 <Link
-                  to="/book-meeting"
+                  to={`/services/${srv.slug}`}
                   className="w-full inline-flex justify-center items-center gap-1.5 py-2.5 rounded-lg bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold hover:bg-primary hover:text-white hover:border-primary transition-all"
                 >
-                  <span>Book Strategist</span>
+                  <span>Explore Details</span>
                   <ArrowRight size={12} />
                 </Link>
               </div>

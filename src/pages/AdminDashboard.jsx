@@ -710,7 +710,7 @@ const AdminDashboard = () => {
       title: j.title || '',
       location: j.location || '',
       type: j.type || 'Full-Time',
-      salary: j.salary || '',
+      salary: j.salary || 'Not Disclosed',
       desc: j.desc || '',
       requirements: j.requirements ? j.requirements.join(', ') : ''
     });

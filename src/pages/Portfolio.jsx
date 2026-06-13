@@ -238,6 +238,18 @@ const Portfolio = () => {
         </div>
       </section>
 
+      {/* Reset Filter Button for Mobile/General View Accessibility */}
+      {category !== 'All' && (
+        <div className="flex justify-center mt-6">
+          <button
+            onClick={() => setCategory('All')}
+            className="inline-flex items-center gap-1.5 px-4.5 py-2.5 rounded-full bg-slate-100 hover:bg-primary hover:text-white text-slate-700 text-xs font-extrabold transition-all duration-300 shadow-sm border border-slate-200"
+          >
+            <span>← Back to All Categories</span>
+          </button>
+        </div>
+      )}
+
       {/* Project Grid */}
       <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {loading ? (
