@@ -42,7 +42,7 @@ const AdminDashboard = () => {
   
   // Job Listing Form State
   const [jobForm, setJobForm] = useState({
-    title: '', location: '', type: 'Full-Time', salary: '', desc: '', requirements: ''
+    title: '', location: '', type: 'Full-Time', salary: 'Not Disclosed', desc: '', requirements: ''
   });
 
   // Common UI State
@@ -699,7 +699,7 @@ const AdminDashboard = () => {
 
   const openAddJob = () => {
     setModalType('add-job');
-    setJobForm({ title: '', location: '', type: 'Full-Time', salary: '', desc: '', requirements: '' });
+    setJobForm({ title: '', location: '', type: 'Full-Time', salary: 'Not Disclosed', desc: '', requirements: '' });
     setModalOpen(true);
   };
 
@@ -1631,10 +1631,9 @@ const AdminDashboard = () => {
                 <table className="w-full text-left border-collapse text-xs">
                   <thead>
                     <tr className="bg-slate-50 border-b border-slate-100 text-slate-500 font-bold">
-                      <th className="p-4">Job Title</th>
+                      <th className="p-4 text-left">Title</th>
                       <th className="p-4">Location</th>
                       <th className="p-4">Type</th>
-                      <th className="p-4">Salary</th>
                       <th className="p-4 text-right">Actions</th>
                     </tr>
                   </thead>
@@ -1644,7 +1643,6 @@ const AdminDashboard = () => {
                         <td className="p-4 font-semibold text-secondary">{j.title}</td>
                         <td className="p-4">{j.location}</td>
                         <td className="p-4 uppercase font-bold text-[10px] text-slate-500">{j.type}</td>
-                        <td className="p-4 font-medium">{j.salary}</td>
                         <td className="p-4 text-right flex justify-end gap-2">
                           <button
                             onClick={() => openEditJob(j)}
@@ -2067,16 +2065,6 @@ const AdminDashboard = () => {
                       <option value="Remote">Remote</option>
                       <option value="Internship">Internship</option>
                     </select>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">Salary Range</label>
-                    <input
-                      type="text" required
-                      value={jobForm.salary}
-                      onChange={(e) => setJobForm({ ...jobForm, salary: e.target.value })}
-                      placeholder="e.g. ₹12L - ₹18L per annum"
-                      className="w-full px-3 py-2 border rounded-lg text-xs"
-                    />
                   </div>
                 </div>
 

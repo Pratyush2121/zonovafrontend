@@ -74,7 +74,7 @@ const About = () => {
               We realized that startups fail not because they cannot build code, but because they build things people do not want, fail to establish customer acquisition funnels, or exhaust capital too early.
             </p>
             <p className="text-slate-600 leading-relaxed">
-              Zonova solves this by combining **cutting-edge web engineering** with **validated venture design**, **dynamic automation systems**, and **scalable marketing operations** under a single team.
+              Zonova solves this by combining cutting-edge web engineering with validated venture design, dynamic automation systems, and scalable marketing operations under a single team.
             </p>
           </div>
 
@@ -174,16 +174,8 @@ const About = () => {
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-lg font-bold text-secondary border-b pb-2">Financials & Contact</h3>
+                <h3 className="text-lg font-bold text-secondary border-b pb-2">Registry & Contact</h3>
                 <div className="space-y-2 text-sm text-slate-600">
-                  <div className="flex justify-between py-1 border-b border-slate-50">
-                    <span className="font-semibold text-slate-500">Authorised Share Capital</span>
-                    <span className="text-right">₹1,00,000</span>
-                  </div>
-                  <div className="flex justify-between py-1 border-b border-slate-50">
-                    <span className="font-semibold text-slate-500">Paid up Capital</span>
-                    <span className="text-right">₹10,000</span>
-                  </div>
                   <div className="flex justify-between py-1 border-b border-slate-50">
                     <span className="font-semibold text-slate-500">E-filing Status</span>
                     <span className="text-right text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded-full text-xs">Active</span>

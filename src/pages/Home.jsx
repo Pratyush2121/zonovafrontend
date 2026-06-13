@@ -67,10 +67,10 @@ const Home = () => {
   ];
 
   const services = [
-    { title: 'Venture Consulting', desc: 'Validating business concepts, product strategy, and growth strategy.', link: '/services', icon: '/images/service_growth.svg' },
-    { title: 'MVP & SaaS Development', desc: 'Engineering custom SaaS platforms, mobile applications, and products.', link: '/services', icon: '/images/service_tech.svg' },
+    { title: 'Software Development', desc: 'Web Apps, Mobile Apps & Custom SaaS Platforms.', link: '/services', icon: '/images/service_tech.svg' },
     { title: 'Performance Marketing', desc: 'Acquiring active customers, running lead ads, and scaling campaigns.', link: '/services', icon: '/images/service_marketing.svg' },
-    { title: 'Business Automation', desc: 'Streamlining operations, integrating systems, and scaling workflows.', link: '/services', icon: '/images/service_automation.svg' }
+    { title: 'Business Automation', desc: 'Streamlining operations, integrating systems, and scaling workflows.', link: '/services', icon: '/images/service_automation.svg' },
+    { title: 'Venture Consulting', desc: 'Validating business concepts, product strategy, and growth strategy.', link: '/services', icon: '/images/service_growth.svg' }
   ];
 
   const steps = [

@@ -220,7 +220,7 @@ const Portfolio = () => {
 
       {/* Filter Tabs */}
       <section className="py-8 border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 flex justify-center items-center gap-2 overflow-x-auto no-scrollbar">
+        <div className="max-w-7xl mx-auto px-4 flex justify-start md:justify-center items-center gap-2 overflow-x-auto no-scrollbar">
           <Filter size={14} className="text-slate-400 shrink-0 mr-1 hidden sm:inline" />
           {categories.map((cat) => (
             <button

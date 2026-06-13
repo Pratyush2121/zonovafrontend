@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Briefcase, MapPin, Clock, DollarSign, Link2, Check, Users } from 'lucide-react';
+import { Briefcase, MapPin, Clock, Link2, Check, Users } from 'lucide-react';
 import SEO from '../components/SEO';
 import Spinner from '../components/Spinner';
 
@@ -186,7 +186,6 @@ const Careers = () => {
                       <div className="flex flex-wrap gap-4 text-slate-400 text-xs mt-2 font-medium">
                         <span className="flex items-center gap-1"><MapPin size={13} /> {job.location}</span>
                         <span className="flex items-center gap-1"><Clock size={13} /> {job.type}</span>
-                        <span className="flex items-center gap-1"><DollarSign size={13} /> {job.salary}</span>
                       </div>
                       {isActive && (
                         <div className="mt-4 pt-4 border-t border-slate-200/50 space-y-4 animate-fade-in text-sm">
