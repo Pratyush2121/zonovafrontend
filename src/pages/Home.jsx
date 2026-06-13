@@ -9,13 +9,9 @@ import { resolveUrl } from '../utils/resolveUrl.js';
 const Home = () => {
   const { settings } = useSelector((state) => state.settings);
   const [blogs, setBlogs] = useState([]);
-  const [projects, setProjects] = useState([]);
   const [faqs, setFaqs] = useState([]);
-  const [testimonials, setTestimonials] = useState([]);
-  const [team, setTeam] = useState([]);
   const [emailSub, setEmailSub] = useState('');
   const [subMessage, setSubMessage] = useState({ type: '', text: '' });
-  const [loading, setLoading] = useState(true);
 
   // FAQ Accordion index
   const [faqIndex, setFaqIndex] = useState(null);
@@ -23,29 +19,18 @@ const Home = () => {
   useEffect(() => {
     const fetchHomeData = async () => {
       try {
-        const [blogRes, projectRes, faqRes, testimonialRes, teamRes] = await Promise.all([
+        const [blogRes, faqRes] = await Promise.all([
           fetch('/api/blogs?status=published&limit=3'),
-          fetch('/api/projects?featured=true&limit=3'),
-          fetch('/api/faqs?limit=5'),
-          fetch('/api/testimonials'),
-          fetch('/api/team')
+          fetch('/api/faqs?limit=5')
         ]);
 
         const blogData = await blogRes.json();
-        const projectData = await projectRes.json();
         const faqData = await faqRes.json();
-        const testimonialData = await testimonialRes.json();
-        const teamData = await teamRes.json();
 
-        if (blogData.success) setBlogs(blogData.blogs.slice(0, 3));
-        if (projectData.success) setProjects(projectData.projects.slice(0, 3));
-        if (faqData.success) setFaqs(faqData.faqs.slice(0, 5));
-        if (testimonialData.success) setTestimonials(testimonialData.testimonials.slice(0, 3));
-        if (teamData.success) setTeam(teamData.team.slice(0, 4));
+        if (blogData.success) setBlogs(blogData.blogs);
+        if (faqData.success) setFaqs(faqData.faqs);
       } catch (err) {
         console.error('Error fetching home page data:', err);
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -101,13 +86,7 @@ const Home = () => {
     { title: 'Dual Marketing-Tech DNA', desc: 'Code means nothing without customers. We build both simultaneously.' }
   ];
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[#FFF4EE]">
-        <Spinner size="large" />
-      </div>
-    );
-  }
+
 
   return (
     <div className="bg-white">
