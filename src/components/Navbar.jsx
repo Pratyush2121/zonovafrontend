@@ -71,8 +71,8 @@ const Navbar = () => {
             {/* Logo */}
             <div className="flex-shrink-0 flex items-center">
               <Link to="/" className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary to-accent flex items-center justify-center text-white font-bold text-xl shadow-md shadow-primary/20">
-                  Z
+                <div className="w-10 h-10 rounded-full overflow-hidden shadow-md border border-slate-100 flex items-center justify-center bg-white shrink-0">
+                  <img src="/images/logo.jpg" alt="Zonova Technologies Logo" className="w-full h-full object-cover scale-[1.1]" />
                 </div>
                 <div className="flex flex-col">
                   <span className="font-extrabold text-xl tracking-tight text-secondary font-sans leading-none">

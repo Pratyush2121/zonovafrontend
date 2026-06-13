@@ -15,8 +15,8 @@ const Footer = () => {
           {/* Company Brief */}
           <div className="space-y-6">
             <Link to="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary to-accent flex items-center justify-center text-white font-bold text-xl shadow-md">
-                Z
+              <div className="w-10 h-10 rounded-full overflow-hidden shadow-md border border-slate-700 flex items-center justify-center bg-white shrink-0">
+                <img src="/images/logo.jpg" alt="Zonova Technologies Logo" className="w-full h-full object-cover scale-[1.1]" />
               </div>
               <div className="flex flex-col">
                 <span className="font-extrabold text-xl tracking-tight text-white font-sans leading-none">
