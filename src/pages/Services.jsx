@@ -109,7 +109,7 @@ const Services = () => {
 
   return (
     <div className="bg-white">
-      <SEO title="Services & Capabilities" description="Browse all 16 venture building, MVP engineering, performance marketing, and operation automation services provided by Zonova." />
+      <SEO title="Our Services - Digital Marketing, SEO & Web Development" description="Explore Zonova Technologies' professional agency services, including targeted SEO, social media marketing, lead generation, custom web/SaaS development, and corporate branding for UK and US markets." />
 
       {/* Banner */}
       <section className="relative overflow-hidden bg-bgSec py-20 border-b border-slate-100">

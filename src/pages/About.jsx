@@ -32,7 +32,7 @@ const About = () => {
 
   return (
     <div className="bg-white">
-      <SEO title="About Us" description="Learn about Zonova Technologies story, mission, core values, and our team of growth executives and software architects." />
+      <SEO title="About Our Agency - Team, Values & Registry" description="Discover Zonova Technologies' mission, core values, corporate registration registry, and our expert team of digital marketers and web engineers serving London, UK, and the US." />
 
       {/* Header Banner */}
       <section className="relative overflow-hidden bg-bgSec py-20 border-b border-slate-100">

@@ -1,40 +1,41 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
   <defs>
-    <!-- Background Gradient: Sleek Slate/Charcoal to Deep Black -->
+    <!-- Background Gradient: Deep Royal Blue to Electric Dark Navy -->
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0F172A" />
-      <stop offset="100%" stop-color="#020617" />
+      <stop offset="0%" stop-color="#1E40AF" />
+      <stop offset="50%" stop-color="#1E3A8A" />
+      <stop offset="100%" stop-color="#0F172A" />
     </linearGradient>
     
-    <!-- Brand Accent Gradient: Vibrant Green to Rich Orange -->
-    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#22C55E" />
-      <stop offset="50%" stop-color="#15803D" />
-      <stop offset="100%" stop-color="#D97706" />
+    <!-- Accent Logo Gradient: Electric Ice Blue to Pure White -->
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="50%" stop-color="#93C5FD" />
+      <stop offset="100%" stop-color="#FFFFFF" />
     </linearGradient>
     
-    <!-- Shadow Effect for Depth -->
+    <!-- Drop Shadow for 3D depth -->
     <filter id="dropShadow" x="-10%" y="-10%" width="130%" height="130%">
-      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.5" />
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.6" />
     </filter>
   </defs>
 
   <!-- Base Rounded Container with subtle border -->
   <rect width="512" height="512" rx="128" fill="url(#bgGrad)" />
-  <rect x="8" y="8" width="496" height="496" rx="120" fill="none" stroke="url(#brandGrad)" stroke-width="4" opacity="0.3" />
+  <rect x="8" y="8" width="496" height="496" rx="120" fill="none" stroke="#FFFFFF" stroke-width="4" opacity="0.15" />
 
-  <!-- Stylized Geometric "Z" Logo composed of clean faceted polygons -->
+  <!-- Premium Geometric Letter 'Z' in pure white and ice blue -->
   <g filter="url(#dropShadow)" transform="translate(106, 96)">
-    <!-- Top Horizontal Bar -->
-    <path d="M 0 0 L 300 0 L 250 80 L 0 80 Z" fill="url(#brandGrad)" />
+    <!-- Top Bar -->
+    <path d="M 0 0 L 300 0 L 250 80 L 0 80 Z" fill="url(#logoGrad)" />
     
     <!-- Diagonal Connecting Stem -->
-    <path d="M 250 80 L 300 0 L 50 320 L 0 320 Z" fill="url(#brandGrad)" opacity="0.9" />
+    <path d="M 250 80 L 300 0 L 50 320 L 0 320 Z" fill="#FFFFFF" opacity="0.95" />
     
-    <!-- Bottom Horizontal Bar -->
-    <path d="M 50 240 L 300 240 L 300 320 L 0 320 Z" fill="url(#brandGrad)" />
+    <!-- Bottom Bar -->
+    <path d="M 50 240 L 300 240 L 300 320 L 0 320 Z" fill="url(#logoGrad)" />
     
-    <!-- Highlight Overlay for Premium Glossy Effect -->
-    <path d="M 0 0 L 300 0 L 285 24 L 0 24 Z" fill="#FFFFFF" opacity="0.15" />
+    <!-- Glossy Highlight Overlay -->
+    <path d="M 0 0 L 300 0 L 285 24 L 0 24 Z" fill="#FFFFFF" opacity="0.25" />
   </g>
 </svg>

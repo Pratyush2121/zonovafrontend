@@ -133,7 +133,7 @@ const Careers = () => {
 
   return (
     <div className="bg-white">
-      <SEO title="Careers" description="Join the venture studio crew at Zonova Technologies. Explore our open positions for software engineers, product managers and marketing leads." />
+      <SEO title="Careers - Join Our Digital Marketing & Tech Agency Team" description="Explore job openings and careers at Zonova Technologies. Apply to join our expert marketing, SEO, and web development teams based in London, UK, and US." />
 
       <section className="relative overflow-hidden bg-bgSec py-16 border-b border-slate-100">
         {/* Floating stickers */}

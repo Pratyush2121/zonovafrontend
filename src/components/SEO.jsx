@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 const SEO = ({ title, description, keywords }) => {
   useEffect(() => {
     // Title
-    document.title = title ? `${title} | Zonova Technologies` : 'Zonova Technologies - Build. Launch. Scale.';
+    document.title = title ? `${title} | Zonova Technologies` : 'Zonova Technologies | Premium Digital Marketing & Web Development Agency';
 
     // Meta Description
     let metaDescription = document.querySelector('meta[name="description"]');

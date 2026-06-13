@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /adminhu
+Disallow: /admin/dashboard
+
+Sitemap: https://www.zonovatechnology.online/sitemap.xml

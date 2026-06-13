@@ -111,7 +111,7 @@ const Home = () => {
 
   return (
     <div className="bg-white">
-      <SEO title="Home - Build. Launch. Scale." />
+      <SEO title="Premium Digital Marketing & Web Development Agency" description="Zonova Technologies is a leading digital marketing agency & website development company. We deliver premier SEO services, social media marketing, lead generation, branding, and custom SaaS engineering in London, UK, and US." />
 
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-6 pb-16 md:pt-16 lg:pt-28 lg:pb-32 bg-gradient-to-b from-bgSec/40 via-white to-white">
@@ -131,8 +131,8 @@ const Home = () => {
                 </span>{' '}
                 and Smart Solutions
               </h1>
-              <p className="text-xl font-bold text-slate-500 tracking-wide">
-                Build. Launch. Scale.
+              <p className="text-xl font-extrabold text-primary tracking-wider uppercase">
+                Digital Marketing & Website Development Agency
               </p>
               <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-lg">
                 Helping founders and businesses turn ambitious ideas into successful companies through technology, performance marketing, operations automation, and business design.

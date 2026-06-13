@@ -64,7 +64,7 @@ const Contact = () => {
 
   return (
     <div className="bg-white">
-      <SEO title="Contact Us" description="Get in touch with Zonova Technologies. Contact us for partnership opportunities, project consultations, or general inquiries." />
+      <SEO title="Contact Us - Hire SEO & Web Development Experts" description="Contact Zonova Technologies to scale your business. Get in touch with our expert digital marketing and web development agency for London, UK, and US consultations." />
 
       <section className="relative overflow-hidden bg-bgSec py-16 border-b border-slate-100">
         {/* Floating stickers */}

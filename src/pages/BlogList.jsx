@@ -88,7 +88,7 @@ const BlogList = () => {
 
   return (
     <div className="bg-white">
-      <SEO title="Blog & Insights" description="Vetted startup playbooks, web development tips, growth marketing strategies, and venture studio operations guides." />
+      <SEO title="Blog & Insights - Latest Tech & Marketing Strategy" description="Discover search engine optimization (SEO) tips, web development guides, growth marketing blueprints, and business insights written by Zonova Technologies." />
 
       <section className="relative overflow-hidden bg-bgSec py-16 border-b border-slate-100">
         {/* Floating stickers */}
