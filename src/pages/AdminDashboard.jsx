@@ -60,8 +60,9 @@ const AdminDashboard = () => {
   });
   const [blogForm, setBlogForm] = useState({
     title: '', content: '', author: '', category: 'Venture Building',
-    tags: '', status: 'draft', metaTitle: '', metaDescription: ''
+    tags: '', status: 'draft', metaTitle: '', metaDescription: '', featuredImage: ''
   });
+  const [blogFile, setBlogFile] = useState(null);
   const [faqForm, setFAQForm] = useState({ question: '', answer: '', category: 'General' });
   const [teamForm, setTeamForm] = useState({ name: '', role: '', bio: '', linkedin: '', twitter: '' });
   const [testimonialForm, setTestimonialForm] = useState({ author: '', role: '', company: '', text: '', rating: 5 });
@@ -377,14 +378,28 @@ const AdminDashboard = () => {
     const method = modalType === 'add-blog' ? 'POST' : 'PUT';
     const url = modalType === 'add-blog' ? '/api/blogs' : `/api/blogs/${selectedItem._id || selectedItem.id}`;
 
+    const formData = new FormData();
+    formData.append('title', blogForm.title);
+    formData.append('content', blogForm.content);
+    formData.append('author', blogForm.author);
+    formData.append('category', blogForm.category);
+    formData.append('tags', blogForm.tags);
+    formData.append('status', blogForm.status);
+    formData.append('metaTitle', blogForm.metaTitle);
+    formData.append('metaDescription', blogForm.metaDescription);
+    if (blogFile) {
+      formData.append('featuredImage', blogFile);
+    } else if (blogForm.featuredImage) {
+      formData.append('featuredImage', blogForm.featuredImage);
+    }
+
     try {
       const res = await fetch(url, {
         method,
         headers: {
-          'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(blogForm)
+        body: formData
       });
       const data = await res.json();
       if (data.success) {
@@ -616,9 +631,10 @@ const AdminDashboard = () => {
 
   const openAddBlog = () => {
     setModalType('add-blog');
+    setBlogFile(null);
     setBlogForm({
       title: '', content: '', author: user?.name || 'Zonova Editor', category: 'Venture Building',
-      tags: '', status: 'draft', metaTitle: '', metaDescription: ''
+      tags: '', status: 'draft', metaTitle: '', metaDescription: '', featuredImage: ''
     });
     setModalOpen(true);
   };
@@ -626,6 +642,7 @@ const AdminDashboard = () => {
   const openEditBlog = (b) => {
     setSelectedItem(b);
     setModalType('edit-blog');
+    setBlogFile(null);
     setBlogForm({
       title: b.title || '',
       content: b.content || '',
@@ -634,7 +651,8 @@ const AdminDashboard = () => {
       tags: b.tags ? b.tags.join(', ') : '',
       status: b.status || 'draft',
       metaTitle: b.metaTitle || '',
-      metaDescription: b.metaDescription || ''
+      metaDescription: b.metaDescription || '',
+      featuredImage: b.featuredImage || ''
     });
     setModalOpen(true);
   };
@@ -1239,7 +1257,7 @@ const AdminDashboard = () => {
                             rel="noreferrer"
                             className="text-primary hover:underline font-bold"
                           >
-                            View File
+                            View Resume
                           </a>
                         </td>
                         <td className="p-4">
@@ -1849,6 +1867,22 @@ const AdminDashboard = () => {
                       className="w-full px-3 py-2 border rounded-lg text-xs"
                     />
                   </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Featured Image</label>
+                  {blogForm.featuredImage && !blogFile && (
+                    <div className="mb-2 flex items-center gap-2">
+                      <img src={blogForm.featuredImage} alt="Current" className="h-10 w-16 object-cover rounded border" />
+                      <span className="text-[10px] text-slate-500">Current Image</span>
+                    </div>
+                  )}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => setBlogFile(e.target.files[0])}
+                    className="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
+                  />
                 </div>
 
                 <button

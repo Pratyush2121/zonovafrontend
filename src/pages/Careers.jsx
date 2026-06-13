@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Briefcase, MapPin, Clock, DollarSign, Upload, Check, Users } from 'lucide-react';
+import { Briefcase, MapPin, Clock, DollarSign, Link2, Check, Users } from 'lucide-react';
 import SEO from '../components/SEO';
 import Spinner from '../components/Spinner';
 
@@ -54,9 +54,9 @@ const Careers = () => {
     email: '',
     phone: '',
     position: '',
+    resumeUrl: '',
     coverLetter: ''
   });
-  const [resumeFile, setResumeFile] = useState(null);
   
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -86,10 +86,6 @@ const Careers = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleFileChange = (e) => {
-    setResumeFile(e.target.files[0]);
-  };
-
   const handleApplyClick = (job) => {
     setActiveJob(job);
     setFormData({ ...formData, position: job.title });
@@ -99,32 +95,34 @@ const Careers = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!resumeFile) {
-      setError('Please upload your resume file.');
+    if (!formData.resumeUrl.trim()) {
+      setError('Please provide your resume drive link.');
       return;
     }
 
     setLoading(true);
     setError('');
 
-    const uploadData = new FormData();
-    uploadData.append('fullName', formData.fullName);
-    uploadData.append('email', formData.email);
-    uploadData.append('phone', formData.phone);
-    uploadData.append('position', formData.position);
-    uploadData.append('coverLetter', formData.coverLetter);
-    uploadData.append('resume', resumeFile);
-
     try {
       const res = await fetch('/api/careers', {
         method: 'POST',
-        body: uploadData
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          position: formData.position,
+          coverLetter: formData.coverLetter,
+          resumeUrl: formData.resumeUrl
+        })
       });
       const data = await res.json();
       if (data.success) {
         setSubmitted(true);
       } else {
-        setError(data.message || 'Application failed. Please verify resume file format.');
+        setError(data.message || 'Application failed. Please verify submitted details.');
       }
     } catch (err) {
       setError('Network connection error. Please try again.');
@@ -294,20 +292,24 @@ const Careers = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-2">Upload Resume (PDF, DOC, DOCX)</label>
-                  <div className="relative border-2 border-dashed border-slate-200 hover:border-primary rounded-xl py-6 px-4 text-center cursor-pointer transition-colors bg-white">
+                  <label className="block text-xs font-semibold text-slate-700 mb-2">Resume Google Drive / Cloud Link</label>
+                  <div className="relative rounded-xl shadow-sm">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                      <Link2 size={16} />
+                    </div>
                     <input
-                      type="file"
+                      type="url"
+                      name="resumeUrl"
                       required
-                      accept=".pdf,.doc,.docx"
-                      onChange={handleFileChange}
-                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                      value={formData.resumeUrl}
+                      onChange={handleTextChange}
+                      placeholder="https://drive.google.com/file/d/... or Dropbox/OneDrive link"
+                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-primary text-sm shadow-sm bg-white"
                     />
-                    <Upload size={24} className="text-slate-400 mx-auto mb-2" />
-                    <span className="block text-xs font-medium text-slate-600">
-                      {resumeFile ? resumeFile.name : 'Choose file or drag here'}
-                    </span>
                   </div>
+                  <span className="block text-[10px] text-slate-400 mt-1 font-medium">
+                    Please ensure the sharing settings are set to "Anyone with the link can view".
+                  </span>
                 </div>
 
                 <div>
