@@ -26,7 +26,7 @@ const SEO = ({ title, description, keywords, ogImage, ogType, schema, canonicalP
     setMetaTag('name', 'description', finalDesc);
 
     // 3. Keywords
-    const finalKeywords = keywords || 'digital marketing, seo services, digital marketing agency, business growth, social media marketing, lead generation, website development, branding, online marketing, zonova technologies, venture studio, startup growth partner, mvp builder, web development, mobile app development, performance marketing, business automation, custom software, startup consulting, mvp development, AI solutions, SaaS development, growth consulting';
+    const finalKeywords = keywords || 'Pratyush Mishra, developer Pratyush Mishra, Pratyush Mishra developer, Pratyush Mishra Zonova, digital marketing, seo services, digital marketing agency, business growth, social media marketing, lead generation, website development, branding, online marketing, zonova technologies, venture studio, startup growth partner, mvp builder, web development, mobile app development, performance marketing, business automation, custom software, startup consulting, mvp development, AI solutions, SaaS development, growth consulting';
     setMetaTag('name', 'keywords', finalKeywords);
 
     // Author and Robots

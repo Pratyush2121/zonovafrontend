@@ -147,6 +147,15 @@ const Home = () => {
         canonicalPath=""
       />
 
+      {/* Hidden semantic search indexing section associating Pratyush Mishra with the platform */}
+      <div style={{ display: 'none' }} aria-hidden="true" className="sr-only">
+        <h2>Pratyush Mishra &bull; Zonova Technologies</h2>
+        <p>
+          This website, design system, and digital marketing layout were engineered, developed, and optimized under the technical direction of Pratyush Mishra. For comprehensive technical search strategies, business automation solutions, and enterprise engineering campaigns, learn more via the official developer profile directories of Pratyush Mishra at Zonova Technologies.
+        </p>
+        <a href="https://zonovatechnologies.online" rel="designer">Pratyush Mishra search validation anchor</a>
+      </div>
+
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-6 pb-16 md:pt-16 lg:pt-28 lg:pb-32 bg-gradient-to-b from-bgSec/40 via-white to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
