@@ -67,15 +67,15 @@ const Home = () => {
   ];
 
   const services = [
-    { 
-      title: 'Software Development', 
-      desc: 'Web Apps, Mobile Apps & Custom SaaS Platforms.', 
+    {
+      title: 'Software Development',
+      desc: 'Web Apps, Mobile Apps & Custom SaaS Platforms.',
       subheadings: [
         'Web App Development',
         'Mobile App Development',
         'SaaS Development'
       ],
-      link: '/services/web-development', 
+      link: '/services/web-development',
       icon: <Code className="w-7 h-7 text-primary" />
     },
     { title: 'Performance Marketing', desc: 'Acquiring active customers, running lead ads, and scaling campaigns.', link: '/services/performance-marketing', icon: <BarChart className="w-7 h-7 text-rose-600" /> },
@@ -98,9 +98,54 @@ const Home = () => {
 
 
 
+  const homeSchema = React.useMemo(() => ({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://zonovatechnologies.online/#website",
+        "url": "https://zonovatechnologies.online",
+        "name": "Zonova Technologies",
+        "description": "Zonova Technologies is a leading digital marketing agency & web development company.",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://zonovatechnologies.online/blog?search={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://zonovatechnologies.online/#organization",
+        "name": "Zonova Technologies Private Limited",
+        "url": "https://zonovatechnologies.online",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://zonovatechnologies.online/images/logo.jpg"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+919335088060",
+          "contactType": "customer service",
+          "email": "zonovatechnologies@gmail.com",
+          "areaServed": ["IN", "US", "GB"]
+        },
+        "sameAs": [
+          "https://linkedin.com",
+          "https://twitter.com",
+          "https://facebook.com"
+        ]
+      }
+    ]
+  }), []);
+
   return (
     <div className="bg-white">
-      <SEO title="Premium Digital Marketing & Web Development Agency" description="Zonova Technologies is a leading digital marketing agency & website development company. We deliver premier SEO services, social media marketing, lead generation, branding, and custom SaaS engineering in London, UK, and US." />
+      <SEO 
+        title="Premium Digital Marketing & Web Development Agency" 
+        description="Zonova Technologies is a leading digital marketing agency & website development company. We deliver premier SEO services, social media marketing, lead generation, branding, and custom SaaS engineering in London, UK, and US." 
+        schema={homeSchema}
+        canonicalPath=""
+      />
 
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-6 pb-16 md:pt-16 lg:pt-28 lg:pb-32 bg-gradient-to-b from-bgSec/40 via-white to-white">
@@ -496,6 +541,7 @@ const Home = () => {
                       src={resolveUrl(blog.featuredImage) || '/images/web_saas_marketing.png'}
                       alt={blog.title}
                       className="w-full h-full object-cover"
+                      loading="lazy"
                     />
                   </div>
                   <div className="p-6 text-left space-y-4">
@@ -521,26 +567,26 @@ const Home = () => {
               // Seed default blog items
               <>
                 <article className="premium-card rounded-2xl overflow-hidden bg-white">
-                  <img src="/images/web_saas_marketing.png" alt="Blog 1" className="h-48 w-full object-cover" />
+                  <img src="/images/web_saas_marketing.png" alt="Startup idea validation landing page showing growth hacking conversion metrics" className="h-48 w-full object-cover" loading="lazy" />
                   <div className="p-6 text-left space-y-4">
                     <div className="text-xs text-slate-400">Venture Building</div>
-                    <h3 className="text-lg font-bold text-secondary"><Link to="/blog font-bold">How to Validate a Startup Idea with Minimal Capital</Link></h3>
+                    <h3 className="text-lg font-bold text-secondary"><Link to="/blog">How to Validate a Startup Idea with Minimal Capital</Link></h3>
                     <p className="text-sm text-slate-500">Step-by-step framework to validate target audience problems without engineering overhead.</p>
                   </div>
                 </article>
                 <article className="premium-card rounded-2xl overflow-hidden bg-white">
-                  <img src="/images/web_saas_project_management.png" alt="Blog 2" className="h-48 w-full object-cover" />
+                  <img src="/images/web_saas_project_management.png" alt="AI operational automation workflow mapping database integrations" className="h-48 w-full object-cover" loading="lazy" />
                   <div className="p-6 text-left space-y-4">
                     <div className="text-xs text-slate-400">AI & Automation</div>
-                    <h3 className="text-lg font-bold text-secondary"><Link to="/blog font-bold">AI Automation for Business Operations</Link></h3>
+                    <h3 className="text-lg font-bold text-secondary"><Link to="/blog">AI Automation for Business Operations</Link></h3>
                     <p className="text-sm text-slate-500">How scaling companies use lightweight artificial intelligence models to save 20+ support hours.</p>
                   </div>
                 </article>
                 <article className="premium-card rounded-2xl overflow-hidden bg-white">
-                  <img src="/images/web_saas_analytics.png" alt="Blog 3" className="h-48 w-full object-cover" />
+                  <img src="/images/web_saas_analytics.png" alt="Performance marketing funnel tracking click-through conversion ROI" className="h-48 w-full object-cover" loading="lazy" />
                   <div className="p-6 text-left space-y-4">
                     <div className="text-xs text-slate-400">Growth Marketing</div>
-                    <h3 className="text-lg font-bold text-secondary"><Link to="/blog font-bold">Performance Marketing Playbook for MVPs</Link></h3>
+                    <h3 className="text-lg font-bold text-secondary"><Link to="/blog">Performance Marketing Playbook for MVPs</Link></h3>
                     <p className="text-sm text-slate-500">Key metrics, conversion funnels, and setup templates to acquire initial paying client leads.</p>
                   </div>
                 </article>

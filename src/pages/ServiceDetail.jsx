@@ -4,7 +4,7 @@ import { servicesData } from '../utils/servicesData';
 import SEO from '../components/SEO';
 import { 
   ArrowRight, ShieldCheck, HelpCircle, Briefcase, 
-  MessageSquare, Star, ArrowUpRight, Check 
+  MessageSquare, Star, ArrowUpRight, Check, X, Info, Calendar, DollarSign 
 } from 'lucide-react';
 
 const ServiceDetail = () => {
@@ -30,81 +30,84 @@ const ServiceDetail = () => {
   }
 
   // Build JSON-LD Structured Data Schema for Search Engines
-  const serviceUrl = `https://www.zonovatechnology.online/services/${slug}`;
-  const serviceSchema = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": service.title,
-    "description": service.metaDescription,
-    "provider": {
-      "@type": "Organization",
-      "name": "Zonova Technologies",
-      "url": "https://www.zonovatechnology.online",
-      "logo": "https://www.zonovatechnology.online/images/logo.jpg"
-    },
-    "areaServed": [
-      { "@type": "Country", "name": "India" },
-      { "@type": "Country", "name": "United Kingdom" },
-      { "@type": "Country", "name": "United States" }
-    ],
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
+  const serviceUrl = `https://zonovatechnologies.online/services/${slug}`;
+  const combinedSchema = React.useMemo(() => {
+    if (!service) return null;
+
+    const serviceSchema = {
+      "@context": "https://schema.org",
+      "@type": "Service",
       "name": service.title,
-      "itemListElement": service.features.map((feat, idx) => ({
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": feat.name,
-          "description": feat.desc
+      "description": service.metaDescription,
+      "provider": {
+        "@type": "Organization",
+        "name": "Zonova Technologies",
+        "url": "https://zonovatechnologies.online",
+        "logo": "https://zonovatechnologies.online/images/logo.jpg"
+      },
+      "areaServed": [
+        { "@type": "Country", "name": "India" },
+        { "@type": "Country", "name": "United Kingdom" },
+        { "@type": "Country", "name": "United States" }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": service.title,
+        "itemListElement": service.features.map((feat, idx) => ({
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": feat.name,
+            "description": feat.desc
+          }
+        }))
+      }
+    };
+
+    const faqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": service.faqs.map((faq) => ({
+        "@type": "Question",
+        "name": faq.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.a
         }
       }))
-    }
-  };
+    };
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": service.faqs.map((faq) => ({
-      "@type": "Question",
-      "name": faq.q,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.a
-      }
-    }))
-  };
-
-  // Combine schemas into a BreadcrumbList + Service + FAQPage graph
-  const combinedSchema = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://www.zonovatechnology.online"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Services",
-            "item": "https://www.zonovatechnology.online/services"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": service.title,
-            "item": serviceUrl
-          }
-        ]
-      },
-      serviceSchema,
-      faqSchema
-    ]
-  };
+    return {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://zonovatechnologies.online"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Services",
+              "item": "https://zonovatechnologies.online/services"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": service.title,
+              "item": serviceUrl
+            }
+          ]
+        },
+        serviceSchema,
+        faqSchema
+      ]
+    };
+  }, [service, serviceUrl]);
 
   return (
     <div className="bg-white">
@@ -187,6 +190,354 @@ const ServiceDetail = () => {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* AEO & GEO Optimization Section */}
+      <section className="py-20 bg-slate-50 border-t border-b border-slate-200">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 text-left">
+          
+          {/* 1. Executive Summary & Direct Definition (AEO/GEO Quick Answer) */}
+          <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-6 hover:border-primary/20 transition-all duration-300">
+            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider w-fit">
+              <Info size={14} />
+              <span>Executive Summary & Quick Answer</span>
+            </div>
+            
+            <div className="space-y-4">
+              <h2 className="text-2xl font-extrabold text-secondary tracking-tight">
+                What is {service.title}?
+              </h2>
+              <div className="bg-slate-50 border-l-4 border-primary p-5 rounded-r-2xl text-slate-700 text-sm leading-relaxed">
+                <strong>Direct Definition:</strong> <dfn className="font-bold text-secondary not-italic bg-white px-1.5 py-0.5 border border-slate-200 rounded mr-1">{service.title}</dfn> is defined as a strategic engineering and growth capability deployed by Zonova Technologies to {service.intro.toLowerCase()}
+              </div>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                By combining client-side code architectures, secure database pipelines, and direct-response marketing configurations under a unified venture studio team, we eliminate typical agency delays and launch high-converting channels in weeks.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-slate-100">
+              <div className="space-y-1">
+                <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest block">Estimated Timeline</span>
+                <span className="font-extrabold text-secondary text-sm">
+                  {['startup-consulting', 'branding'].includes(slug) ? '2 - 3 Weeks' : ['mvp-development', 'ui-ux-design'].includes(slug) ? '4 - 8 Weeks' : '8 - 12 Weeks'}
+                </span>
+              </div>
+              <div className="space-y-1">
+                <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest block">Resource Standard</span>
+                <span className="font-extrabold text-primary text-sm">Senior Vetted Developers</span>
+              </div>
+              <div className="space-y-1">
+                <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest block">IP Ownership</span>
+                <span className="font-extrabold text-secondary text-sm">100% Client-Owned</span>
+              </div>
+            </div>
+          </div>
+
+          {/* 2. Tech Stack & Deliverables */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-6">
+              <h3 className="text-lg font-bold text-secondary border-b pb-3 flex items-center gap-2">
+                <ShieldCheck className="text-primary" size={20} />
+                <span>Technology Stack & Tools</span>
+              </h3>
+              <p className="text-slate-500 text-xs leading-relaxed">
+                We design with high-performance frameworks and analytics architectures to ensure page speeds load under 1 second.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {(['startup-consulting', 'performance-marketing', 'lead-generation', 'seo-services'].includes(slug) 
+                  ? ['Google Analytics 4', 'GTM', 'Google Search Console', 'HubSpot CRM', 'SEMrush', 'Ahrefs']
+                  : ['branding', 'ui-ux-design'].includes(slug)
+                    ? ['Figma', 'Adobe Creative Suite', 'SVG Optimization', 'CSS Variables', 'Tailwind CSS']
+                    : ['React', 'Node.js', 'Express', 'MongoDB', 'MERN Stack', 'REST APIs', 'Vercel / AWS']
+                ).map((tech, idx) => (
+                  <span key={idx} className="bg-slate-50 border border-slate-200/80 px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 shadow-sm">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-6">
+              <h3 className="text-lg font-bold text-secondary border-b pb-3 flex items-center gap-2">
+                <Briefcase className="text-primary" size={20} />
+                <span>Campaign Key Deliverables</span>
+              </h3>
+              <ul className="space-y-3.5">
+                {(['startup-consulting', 'performance-marketing', 'lead-generation', 'seo-services'].includes(slug)
+                  ? [
+                      'Comprehensive keyword research report and roadmap files',
+                      'Verified prospect databases synced to your sales team CRM',
+                      'Fully configured GA4 dashboards and conversion goal tracking tags',
+                      'Direct-response landing pages and optimized paragraph copy drafts'
+                    ]
+                  : ['branding', 'ui-ux-design'].includes(slug)
+                    ? [
+                        'Scalable vector logo assets (.SVG, .PNG, .EPS formats)',
+                        'Comprehensive typography rules and CSS/Tailwind token configurations',
+                        'High-fidelity Figma wireframes and interactive prototype paths',
+                        'Consistent visual guidelines manual and layout rules'
+                      ]
+                    : [
+                        'Production-ready client Git repository with clean commit history',
+                        'Scalable database schemas and REST API documentation endpoints',
+                        'Blazing-fast responsive frontend views with dynamic state controllers',
+                        'Automated pipeline configuration for CI/CD launch cycles'
+                      ]
+                ).map((item, idx) => (
+                  <li key={idx} className="flex gap-2.5 items-start text-xs sm:text-sm text-slate-600">
+                    <Check size={16} className="text-primary shrink-0 mt-0.5 stroke-[3]" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* 3. Pricing Factors Guide */}
+          <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-6">
+            <h3 className="text-lg font-bold text-secondary border-b pb-3 flex items-center gap-1.5">
+              <DollarSign className="text-primary" size={20} />
+              <span>Investment & Pricing Factors</span>
+            </h3>
+            <p className="text-slate-500 text-xs leading-relaxed">
+              We operate under a transparent venture studio layout. Pricing structures are driven by the following parameters:
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm text-slate-600">
+              {(['startup-consulting', 'branding', 'ui-ux-design'].includes(slug)
+                ? [
+                    'Total brand system assets or screen designs scoped',
+                    'Financial modeling complexity and cohort count requirements',
+                    'Figma feedback loops and review iterations',
+                    'Integration with pre-existing design systems and guides'
+                  ]
+                : [
+                    'Total database schemas and table relationships to map',
+                    'Complexity of external APIs integrated (Stripe Connect, Twilio, maps)',
+                    'Programmatic landing page and database configurations',
+                    'Custom compliance parameters required (HIPAA, GDPR controls)'
+                  ]
+              ).map((factor, idx) => (
+                <div key={idx} className="p-3 border border-slate-100 bg-slate-50/50 rounded-xl flex gap-2 items-start">
+                  <span className="font-bold text-primary shrink-0 mt-0.5">•</span>
+                  <span>{factor}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 4. Decision and Comparison Table */}
+          <div className="space-y-6">
+            <div className="text-center md:text-left space-y-2">
+              <h2 className="text-2xl font-extrabold text-secondary tracking-tight">
+                Comparison Guide & Model Decision Table
+              </h2>
+              <p className="text-slate-500 text-sm">
+                How our custom development model stacks up against other standard execution methods.
+              </p>
+            </div>
+            
+            <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <table className="w-full text-left border-collapse text-xs sm:text-sm">
+                <thead>
+                  <tr className="bg-slate-50 border-b border-slate-200 text-secondary font-bold text-xs uppercase tracking-wider">
+                    <th className="p-4 sm:p-5">Delivery Parameters</th>
+                    <th className="p-4 sm:p-5">Freelancer Hiring</th>
+                    <th className="p-4 sm:p-5">Traditional Agency</th>
+                    <th className="p-4 sm:p-5 bg-primary/5 text-primary border-l border-primary/20">Zonova Venture Studio</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 text-slate-600 font-medium">
+                  <tr>
+                    <td className="p-4 sm:p-5 font-bold text-secondary">Operational Velocity</td>
+                    <td className="p-4 sm:p-5">Variable / High risk of delay</td>
+                    <td className="p-4 sm:p-5">Slow due to account hierarchies</td>
+                    <td className="p-4 sm:p-5 bg-primary/5 border-l border-primary/20 text-secondary font-bold">Fast Sprints (Prototyping in 4-8 weeks)</td>
+                  </tr>
+                  <tr>
+                    <td className="p-4 sm:p-5 font-bold text-secondary">Code Quality & Stack</td>
+                    <td className="p-4 sm:p-5">Inconsistent / No QA checks</td>
+                    <td className="p-4 sm:p-5">Legacy templates & bloat</td>
+                    <td className="p-4 sm:p-5 bg-primary/5 border-l border-primary/20 text-secondary font-bold">Modern React/Next & clean MVC patterns</td>
+                  </tr>
+                  <tr>
+                    <td className="p-4 sm:p-5 font-bold text-secondary">Marketing Integration</td>
+                    <td className="p-4 sm:p-5">None (Code only)</td>
+                    <td className="p-4 sm:p-5">Disconnected departments</td>
+                    <td className="p-4 sm:p-5 bg-primary/5 border-l border-primary/20 text-secondary font-bold">Unified (Codes built to target CTR conversion)</td>
+                  </tr>
+                  <tr>
+                    <td className="p-4 sm:p-5 font-bold text-secondary">Project Risk Model</td>
+                    <td className="p-4 sm:p-5">High (Individual churn risk)</td>
+                    <td className="p-4 sm:p-5">Fixed retainers, no performance metrics</td>
+                    <td className="p-4 sm:p-5 bg-primary/5 border-l border-primary/20 text-secondary font-bold">Low (Shared metrics, milestone validation)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* 5. Delivery Process & Timeline Sprints */}
+          <div className="space-y-6">
+            <h2 className="text-2xl font-extrabold text-secondary tracking-tight text-center md:text-left">
+              Step-by-Step Delivery Roadmap
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              {[
+                { step: '01', title: 'Scope & Align', desc: 'Identify core parameters, target keywords, user journeys, and mock structures.', icon: <Briefcase className="w-5 h-5 text-indigo-500" /> },
+                { step: '02', title: 'Figma & Visuals', desc: 'Design visual manual layouts and page interactions for client verification.', icon: <HelpCircle className="w-5 h-5 text-cyan-500" /> },
+                { step: '03', title: 'Code Sprints', desc: 'Deploy database models, responsive frontend views, and third-party APIs.', icon: <ShieldCheck className="w-5 h-5 text-amber-500" /> },
+                { step: '04', title: 'Launch & Optimize', desc: 'Enforce Core Web Vitals checks, schema validation, and scale search index.', icon: <Calendar className="w-5 h-5 text-emerald-500" /> }
+              ].map((proc, idx) => (
+                <div key={idx} className="bg-white border border-slate-200 p-6 rounded-2xl space-y-4 shadow-sm hover:-translate-y-1 transition-all duration-300">
+                  <div className="flex justify-between items-center">
+                    <div className="w-9 h-9 rounded-xl bg-slate-50 border flex items-center justify-center">
+                      {proc.icon}
+                    </div>
+                    <span className="text-xs font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">Phase {proc.step}</span>
+                  </div>
+                  <div className="space-y-1">
+                    <h3 className="font-bold text-secondary text-sm">{proc.title}</h3>
+                    <p className="text-xs text-slate-500 leading-relaxed">{proc.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 6. Pros & Cons Checklist */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-4">
+              <h3 className="text-lg font-bold text-secondary border-b pb-2 flex items-center gap-2">
+                <Check className="text-emerald-600 stroke-[3]" size={20} />
+                <span>Advantages & Strategic Benefits</span>
+              </h3>
+              <ul className="space-y-3 text-xs sm:text-sm text-slate-600">
+                <li className="flex gap-2 items-start">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0" />
+                  <span><strong>Velocity of Execution</strong>: Sprints structured to launch initial versions in weeks, not years.</span>
+                </li>
+                <li className="flex gap-2 items-start">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0" />
+                  <span><strong>Top-tier Developers</strong>: Access to senior, vetted developers bypassing recruitment latency.</span>
+                </li>
+                <li className="flex gap-2 items-start">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0" />
+                  <span><strong>SEO and AEO Built-in</strong>: Content tags and technical schemas pre-installed directly at launch.</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-4">
+              <h3 className="text-lg font-bold text-secondary border-b pb-2 flex items-center gap-2">
+                <X className="text-rose-600 stroke-[3]" size={20} />
+                <span>Operational Constraints</span>
+              </h3>
+              <ul className="space-y-3 text-xs sm:text-sm text-slate-600">
+                <li className="flex gap-2 items-start">
+                  <span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 shrink-0" />
+                  <span><strong>Selective Partnerships</strong>: We restrict client onboard capacity to maintain developer quality.</span>
+                </li>
+                <li className="flex gap-2 items-start">
+                  <span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 shrink-0" />
+                  <span><strong>No Legacy Maintenance</strong>: Focus is structured on high-growth scaling, not support on dated stacks.</span>
+                </li>
+                <li className="flex gap-2 items-start">
+                  <span className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 shrink-0" />
+                  <span><strong>Unit Economics Requirements</strong>: Sprints require baseline market validation checks to launch.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* 7. Common Pitfalls */}
+          <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-base font-bold text-secondary uppercase tracking-wider text-rose-600">Common Industry Mistakes</h3>
+              <div className="space-y-3 text-xs sm:text-sm text-slate-600">
+                <p><strong>Over-scoping MVP Sprints</strong>: Building complex multi-tier features before validating core value loops exhaust seed budgets prematurely.</p>
+                <p><strong>Neglecting Search Index Readiness</strong>: Postponing technical SEO tags, canonical routes, and schemas until months post-release blocks organic crawler indexing.</p>
+              </div>
+            </div>
+            
+            <div className="space-y-4 md:border-l md:pl-8 border-slate-200">
+              <h3 className="text-base font-bold text-secondary uppercase tracking-wider text-primary">Why Choose Zonova Technologies</h3>
+              <div className="space-y-3 text-xs sm:text-sm text-slate-600">
+                <p><strong>Dual DNA Architecture</strong>: We combine robust MERN code structures with expert search optimization and direct-response performance campaigns simultanously.</p>
+                <p><strong>MCA Registry Transparency</strong>: Verified active registry (CIN: U68200MH2025PTC449258) built on long-term corporate compliance and director DIN standards.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* 8. Industries Served (SILO Architectural Links) */}
+          <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-6">
+            <h3 className="text-lg font-bold text-secondary border-b pb-3 uppercase tracking-widest text-xs flex items-center gap-1.5">
+              <Info size={14} className="text-primary" />
+              <span>Target Industries Served</span>
+            </h3>
+            <p className="text-slate-500 text-xs leading-relaxed">
+              Explore how we tailor our core {service.title.toLowerCase()} specifically across different business verticals:
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {(() => {
+                const isMarketing = ['seo-services', 'performance-marketing', 'lead-generation'].includes(slug);
+                const isBranding = ['branding', 'ui-ux-design'].includes(slug);
+                let links = [];
+
+                if (isMarketing) {
+                  links = [
+                    { name: 'Healthcare Providers', path: '/industry/digital-marketing-for-healthcare' },
+                    { name: 'Real Estate Networks', path: '/industry/digital-marketing-for-real-estate' },
+                    { name: 'Construction Contractors', path: '/industry/digital-marketing-for-construction' },
+                    { name: 'Education Academies', path: '/industry/digital-marketing-for-education' },
+                    { name: 'Food & Restaurants', path: '/industry/digital-marketing-for-restaurants' },
+                    { name: 'SaaS Startups', path: '/industry/seo-for-saas-startups' },
+                    { name: 'E-commerce Brands', path: '/industry/ai-marketing-for-ecommerce' }
+                  ];
+                } else if (isBranding) {
+                  links = [
+                    { name: 'SaaS Startups', path: '/industry/branding-for-startups' },
+                    { name: 'Educational Institutions', path: '/industry/digital-marketing-for-education' }
+                  ];
+                } else {
+                  links = [
+                    { name: 'Manufacturing Catalogs', path: '/industry/web-development-for-manufacturing' },
+                    { name: 'SaaS Tech Startups', path: '/industry/seo-for-saas-startups' },
+                    { name: 'E-commerce Stores', path: '/industry/ai-marketing-for-ecommerce' }
+                  ];
+                }
+
+                return links.map((lnk, i) => (
+                  <Link 
+                    key={i} 
+                    to={lnk.path}
+                    className="inline-flex items-center gap-1.5 bg-slate-50 hover:bg-primary hover:text-white px-4 py-2 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 transition-all duration-300"
+                  >
+                    <span>{lnk.name}</span>
+                    <ArrowRight size={10} />
+                  </Link>
+                ));
+              })()}
+            </div>
+          </div>
+
+          {/* 9. Final CTA Block */}
+          <div className="bg-secondary text-white rounded-3xl p-8 md:p-12 shadow-xl flex flex-col md:flex-row justify-between items-center gap-8 relative overflow-hidden">
+            <div className="absolute top-[-30%] right-[-10%] w-80 h-80 rounded-full bg-primary/20 filter blur-3xl" />
+            <div className="space-y-3 z-10 text-center md:text-left">
+              <h3 className="text-2xl font-extrabold sm:text-3xl">Ready to Launch Your Sprints?</h3>
+              <p className="text-slate-400 text-sm max-w-md leading-relaxed">
+                Connect with our senior architects to outline scope parameters and build a conversion validation deck.
+              </p>
+            </div>
+            <Link 
+              to="/book-meeting" 
+              className="bg-primary hover:bg-primary-dark text-white font-bold py-3.5 px-8 rounded-xl text-sm transition-all z-10 shrink-0 shadow-lg shadow-primary/20 hover:scale-105"
+            >
+              Apply for Sprints
+            </Link>
+          </div>
+
         </div>
       </section>
 

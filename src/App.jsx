@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Provider, useDispatch } from 'react-redux';
 import { store } from './store';
@@ -9,23 +9,25 @@ import { Phone } from 'lucide-react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
-// Pages
-import Home from './pages/Home';
-import About from './pages/About';
-import Services from './pages/Services';
-import ServiceDetail from './pages/ServiceDetail';
-import StartupPartnership from './pages/StartupPartnership';
-import Portfolio from './pages/Portfolio';
-import ProjectDetails from './pages/ProjectDetails';
-import BlogList from './pages/BlogList';
-import BlogDetails from './pages/BlogDetails';
-import Careers from './pages/Careers';
-import BookMeeting from './pages/BookMeeting';
-import Contact from './pages/Contact';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import TermsConditions from './pages/TermsConditions';
-import AdminLogin from './pages/AdminLogin';
-import AdminDashboard from './pages/AdminDashboard';
+// Pages (Lazy Loaded for Core Web Vitals)
+const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/About'));
+const Services = lazy(() => import('./pages/Services'));
+const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
+const StartupPartnership = lazy(() => import('./pages/StartupPartnership'));
+const Portfolio = lazy(() => import('./pages/Portfolio'));
+const ProjectDetails = lazy(() => import('./pages/ProjectDetails'));
+const BlogList = lazy(() => import('./pages/BlogList'));
+const BlogDetails = lazy(() => import('./pages/BlogDetails'));
+const Careers = lazy(() => import('./pages/Careers'));
+const BookMeeting = lazy(() => import('./pages/BookMeeting'));
+const Contact = lazy(() => import('./pages/Contact'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const TermsConditions = lazy(() => import('./pages/TermsConditions'));
+const AdminLogin = lazy(() => import('./pages/AdminLogin'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
+const LocationLandingPage = lazy(() => import('./pages/LocationLandingPage'));
+const IndustryLandingPage = lazy(() => import('./pages/IndustryLandingPage'));
 
 import './App.css';
 
@@ -73,27 +75,35 @@ function App() {
           <div className="flex flex-col min-h-screen bg-white text-slate-900 selection:bg-primary/10 selection:text-primary">
             <Navbar />
             <ScrollToTop />
-            <main className="flex-grow">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/services/:slug" element={<ServiceDetail />} />
-                <Route path="/startup-partnership" element={<StartupPartnership />} />
-                <Route path="/portfolio" element={<Portfolio />} />
-                <Route path="/portfolio/:id" element={<ProjectDetails />} />
-                <Route path="/blog" element={<BlogList />} />
-                <Route path="/blog/:slug" element={<BlogDetails />} />
-                <Route path="/careers" element={<Careers />} />
-                <Route path="/book-meeting" element={<BookMeeting />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                <Route path="/terms-conditions" element={<TermsConditions />} />
-                
-                {/* Admin Management Panel */}
-                <Route path="/adminhu" element={<AdminLogin />} />
-                <Route path="/admin/dashboard" element={<AdminDashboard />} />
-              </Routes>
+             <main className="flex-grow">
+              <Suspense fallback={
+                <div className="min-h-[60vh] flex items-center justify-center bg-slate-50">
+                  <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+                </div>
+              }>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/services" element={<Services />} />
+                  <Route path="/services/:slug" element={<ServiceDetail />} />
+                  <Route path="/startup-partnership" element={<StartupPartnership />} />
+                  <Route path="/portfolio" element={<Portfolio />} />
+                  <Route path="/portfolio/:id" element={<ProjectDetails />} />
+                  <Route path="/blog" element={<BlogList />} />
+                  <Route path="/blog/:slug" element={<BlogDetails />} />
+                  <Route path="/careers" element={<Careers />} />
+                  <Route path="/book-meeting" element={<BookMeeting />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                  <Route path="/terms-conditions" element={<TermsConditions />} />
+                  <Route path="/digital-marketing-agency-:location" element={<LocationLandingPage />} />
+                  <Route path="/industry/:industrySlug" element={<IndustryLandingPage />} />
+                  
+                  {/* Admin Management Panel */}
+                  <Route path="/adminhu" element={<AdminLogin />} />
+                  <Route path="/admin/dashboard" element={<AdminDashboard />} />
+                </Routes>
+              </Suspense>
             </main>
             <Footer />
             {/* Global Sticky Call Widget */}

@@ -3,4 +3,4 @@ Allow: /
 Disallow: /adminhu
 Disallow: /admin/dashboard
 
-Sitemap: https://www.zonovatechnology.online/sitemap.xml
+Sitemap: https://zonovatechnologies.online/sitemap.xml

@@ -62,9 +62,27 @@ const Contact = () => {
     }
   };
 
+  const contactSchema = React.useMemo(() => ({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ContactPage",
+        "@id": "https://zonovatechnologies.online/contact",
+        "url": "https://zonovatechnologies.online/contact",
+        "name": "Contact Zonova Technologies",
+        "description": "Have a project or partnership inquiry? Reach out and our team will get in touch shortly."
+      }
+    ]
+  }), []);
+
   return (
     <div className="bg-white">
-      <SEO title="Contact Us - Hire SEO & Web Development Experts" description="Contact Zonova Technologies to scale your business. Get in touch with our expert digital marketing and web development agency for London, UK, and US consultations." />
+      <SEO 
+        title="Contact Us - Hire SEO & Web Development Experts" 
+        description="Contact Zonova Technologies to scale your business. Get in touch with our expert digital marketing and web development agency for London, UK, and US consultations." 
+        schema={contactSchema}
+        canonicalPath="/contact"
+      />
 
       <section className="relative overflow-hidden bg-bgSec py-16 border-b border-slate-100">
         {/* Floating stickers */}
@@ -160,8 +178,9 @@ const Contact = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-2">Full Name</label>
+                    <label htmlFor="name-input" className="block text-xs font-semibold text-slate-700 mb-2">Full Name</label>
                     <input
+                      id="name-input"
                       type="text"
                       name="name"
                       required
@@ -172,8 +191,9 @@ const Contact = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-2">Business Email</label>
+                    <label htmlFor="email-input" className="block text-xs font-semibold text-slate-700 mb-2">Business Email</label>
                     <input
+                      id="email-input"
                       type="email"
                       name="email"
                       required
@@ -187,8 +207,9 @@ const Contact = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-2">Phone Number</label>
+                    <label htmlFor="phone-input" className="block text-xs font-semibold text-slate-700 mb-2">Phone Number</label>
                     <input
+                      id="phone-input"
                       type="tel"
                       name="phone"
                       value={formData.phone}
@@ -198,8 +219,9 @@ const Contact = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-2">Company Name</label>
+                    <label htmlFor="company-input" className="block text-xs font-semibold text-slate-700 mb-2">Company Name</label>
                     <input
+                      id="company-input"
                       type="text"
                       name="company"
                       value={formData.company}
@@ -211,8 +233,9 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-2">Area of Interest</label>
+                  <label htmlFor="service-select" className="block text-xs font-semibold text-slate-700 mb-2">Area of Interest</label>
                   <select
+                    id="service-select"
                     name="serviceInterestedIn"
                     required
                     value={formData.serviceInterestedIn}
@@ -227,8 +250,9 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-2">Message</label>
+                  <label htmlFor="message-input" className="block text-xs font-semibold text-slate-700 mb-2">Message</label>
                   <textarea
+                    id="message-input"
                     name="message"
                     required
                     rows={4}

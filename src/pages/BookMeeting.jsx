@@ -137,8 +137,9 @@ const BookMeeting = () => {
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-2">Full Name</label>
+                    <label htmlFor="fullname-input" className="block text-xs font-semibold text-slate-700 mb-2">Full Name</label>
                     <input
+                      id="fullname-input"
                       type="text"
                       name="fullName"
                       required
@@ -149,8 +150,9 @@ const BookMeeting = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-2">Business Email</label>
+                    <label htmlFor="email-input" className="block text-xs font-semibold text-slate-700 mb-2">Business Email</label>
                     <input
+                      id="email-input"
                       type="email"
                       name="email"
                       required
@@ -164,8 +166,9 @@ const BookMeeting = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-2">Mobile Number</label>
+                    <label htmlFor="phone-input" className="block text-xs font-semibold text-slate-700 mb-2">Mobile Number</label>
                     <input
+                      id="phone-input"
                       type="tel"
                       name="phone"
                       required
@@ -176,8 +179,9 @@ const BookMeeting = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-2">Company / Startup Name</label>
+                    <label htmlFor="company-input" className="block text-xs font-semibold text-slate-700 mb-2">Company / Startup Name</label>
                     <input
+                      id="company-input"
                       type="text"
                       name="company"
                       value={formData.company}
@@ -190,8 +194,9 @@ const BookMeeting = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-2">Service Required</label>
+                    <label htmlFor="service-select" className="block text-xs font-semibold text-slate-700 mb-2">Service Required</label>
                     <select
+                      id="service-select"
                       name="serviceRequired"
                       required
                       value={formData.serviceRequired}
@@ -203,8 +208,9 @@ const BookMeeting = () => {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-2">Meeting Type</label>
+                    <label htmlFor="meeting-select" className="block text-xs font-semibold text-slate-700 mb-2">Meeting Type</label>
                     <select
+                      id="meeting-select"
                       name="meetingType"
                       value={formData.meetingType}
                       onChange={handleTextChange}
@@ -217,7 +223,7 @@ const BookMeeting = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-3">Project Budget Range</label>
+                  <span className="block text-xs font-semibold text-slate-700 mb-3">Project Budget Range</span>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                     {budgets.map((bud) => (
                       <button
@@ -246,8 +252,9 @@ const BookMeeting = () => {
                 />
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-2">Message / Requirements</label>
+                  <label htmlFor="message-input" className="block text-xs font-semibold text-slate-700 mb-2">Message / Requirements</label>
                   <textarea
+                    id="message-input"
                     name="message"
                     rows={3}
                     value={formData.message}

@@ -1,7 +1,31 @@
 {
   "rewrites": [
     {
-      "source": "/((?!api|uploads).*[^.])",
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemaps/sitemap.xml"
+    },
+    {
+      "source": "/sitemap-static.xml",
+      "destination": "/api/sitemaps/sitemap-static.xml"
+    },
+    {
+      "source": "/blog-sitemap.xml",
+      "destination": "/api/sitemaps/blog-sitemap.xml"
+    },
+    {
+      "source": "/portfolio-sitemap.xml",
+      "destination": "/api/sitemaps/portfolio-sitemap.xml"
+    },
+    {
+      "source": "/image-sitemap.xml",
+      "destination": "/api/sitemaps/image-sitemap.xml"
+    },
+    {
+      "source": "/rss.xml",
+      "destination": "/api/sitemaps/rss.xml"
+    },
+    {
+      "source": "/((?!api|uploads|sitemap|rss).*[^.])",
       "destination": "/index.html"
     }
   ]

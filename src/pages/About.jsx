@@ -30,9 +30,57 @@ const About = () => {
     { icon: <Heart size={24} />, title: 'Execution Obsession', desc: 'Beautiful designs and clean code are only as good as the revenue and traction they generate.' }
   ];
 
+  const aboutSchema = React.useMemo(() => ({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "AboutPage",
+        "@id": "https://zonovatechnologies.online/about",
+        "url": "https://zonovatechnologies.online/about",
+        "name": "About Zonova Technologies",
+        "description": "Discover Zonova Technologies' mission, core values, corporate registration registry, and our expert team of digital marketers and web engineers."
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://zonovatechnologies.online/#organization",
+        "name": "Zonova Technologies Private Limited",
+        "url": "https://zonovatechnologies.online",
+        "logo": "https://zonovatechnologies.online/images/logo.jpg",
+        "foundingDate": "2025-05-26",
+        "founders": [
+          {
+            "@type": "Person",
+            "name": "Abhinav Neeraj Mishra",
+            "jobTitle": "Director & Tech Architect",
+            "sameAs": ["https://linkedin.com"]
+          },
+          {
+            "@type": "Person",
+            "name": "Siddhesh Pradeep Rane",
+            "jobTitle": "Director & Growth Strategist",
+            "sameAs": ["https://linkedin.com"]
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "D WING 403 BHOOMI ACROPOLIS Virar Thane",
+          "addressLocality": "Mumbai",
+          "addressRegion": "Maharashtra",
+          "postalCode": "401303",
+          "addressCountry": "IN"
+        }
+      }
+    ]
+  }), []);
+
   return (
     <div className="bg-white">
-      <SEO title="About Our Agency - Team, Values & Registry" description="Discover Zonova Technologies' mission, core values, corporate registration registry, and our expert team of digital marketers and web engineers serving London, UK, and the US." />
+      <SEO 
+        title="About Our Agency - Team, Values & Registry" 
+        description="Discover Zonova Technologies' mission, core values, corporate registration registry, and our expert team of digital marketers and web engineers serving London, UK, and the US." 
+        schema={aboutSchema}
+        canonicalPath="/about"
+      />
 
       {/* Header Banner */}
       <section className="relative overflow-hidden bg-bgSec py-20 border-b border-slate-100">
@@ -199,24 +247,56 @@ const About = () => {
             </div>
 
             <div className="border-t pt-6">
-              <h3 className="text-lg font-bold text-secondary mb-4">Board of Directors / Signatory Details</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-4 border border-slate-100 bg-slate-50/50 rounded-2xl flex items-center justify-between">
-                  <div>
-                    <h4 className="font-bold text-secondary text-sm">ABHINAV NEERAJ MISHRA</h4>
-                    <p className="text-xs text-slate-400 mt-1">DIN: 11125863 &bull; Appointed 26-05-2025</p>
+              <h3 className="text-lg font-bold text-secondary mb-4">Board of Directors & Founders</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="p-5 border border-slate-100 bg-slate-50/50 rounded-2xl space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h4 className="font-bold text-secondary text-sm">ABHINAV NEERAJ MISHRA</h4>
+                      <p className="text-xs text-slate-400 mt-0.5">DIN: 11125863 &bull; Appointed 26-05-2025</p>
+                    </div>
+                    <span className="text-[10px] uppercase tracking-wider font-semibold text-primary bg-primary/10 px-2 py-1 rounded-lg">Director</span>
                   </div>
-                  <span className="text-[10px] uppercase tracking-wider font-semibold text-primary bg-primary/10 px-2 py-1 rounded-lg">Director</span>
+                  <p className="text-xs text-slate-500 leading-relaxed">
+                    <strong>Co-founder & Tech Architect</strong>: Seasoned full-stack engineer specializing in robust MERN frameworks, database scaling, API integrations, and secure business operations workflows.
+                  </p>
                 </div>
-                <div className="p-4 border border-slate-100 bg-slate-50/50 rounded-2xl flex items-center justify-between">
-                  <div>
-                    <h4 className="font-bold text-secondary text-sm">SIDDHESH PRADEEP RANE</h4>
-                    <p className="text-xs text-slate-400 mt-1">DIN: 11125864 &bull; Appointed 26-05-2025</p>
+                <div className="p-5 border border-slate-100 bg-slate-50/50 rounded-2xl space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h4 className="font-bold text-secondary text-sm">SIDDHESH PRADEEP RANE</h4>
+                      <p className="text-xs text-slate-400 mt-0.5">DIN: 11125864 &bull; Appointed 26-05-2025</p>
+                    </div>
+                    <span className="text-[10px] uppercase tracking-wider font-semibold text-primary bg-primary/10 px-2 py-1 rounded-lg">Director</span>
                   </div>
-                  <span className="text-[10px] uppercase tracking-wider font-semibold text-primary bg-primary/10 px-2 py-1 rounded-lg">Director</span>
+                  <p className="text-xs text-slate-500 leading-relaxed">
+                    <strong>Co-founder & Growth Strategist</strong>: Expert technical search strategist and growth marketer focused on conversion funnels, paid search ads, list prospecting, and local SEO.
+                  </p>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Editorial Policy & Content Guidelines */}
+      <section className="py-20 bg-slate-100 border-t border-slate-200">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-left space-y-6">
+          <div className="space-y-2">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-secondary tracking-tight">
+              Editorial Policy & Code Guidelines
+            </h2>
+            <p className="text-slate-500 text-sm">
+              How we verify information and audit tech strategies at Zonova Technologies.
+            </p>
+          </div>
+          <div className="bg-white p-8 border border-slate-200 rounded-3xl space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <p>
+              At Zonova Technologies, we are committed to providing highly accurate and fact-checked insights. Our blogs, case studies, and engineering guidelines are authored exclusively by professional developers and certified growth marketers with practical domain experience.
+            </p>
+            <p>
+              We maintain absolute transparency regarding corporate status, listed signees, and regional coordinates. We do not engage in clickbait editorial guidelines or unverified reviews. Every technical playbook is stress-tested on real production environments before publication.
+            </p>
           </div>
         </div>
       </section>

@@ -123,6 +123,8 @@ const Navbar = () => {
             <div className="flex lg:hidden">
               <button
                 onClick={toggleMenu}
+                aria-label="Toggle navigation menu"
+                aria-expanded={isOpen}
                 className="text-slate-600 hover:text-primary p-2 focus:outline-none"
               >
                 {isOpen ? <X size={24} /> : <Menu size={24} />}

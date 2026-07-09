@@ -86,9 +86,27 @@ const BlogList = () => {
 
   const activeBlogs = blogs.length > 0 ? blogs : (category === 'All' && !searchQuery ? fallbackBlogs : fallbackBlogs.filter(b => b.category?.toLowerCase() === category.toLowerCase() || b.title.toLowerCase().includes(searchQuery.toLowerCase())));
 
+  const blogListSchema = React.useMemo(() => ({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": "https://zonovatechnologies.online/blog",
+        "url": "https://zonovatechnologies.online/blog",
+        "name": "Zonova Technologies Insights Blog",
+        "description": "Discover search engine optimization (SEO) tips, web development guides, growth marketing blueprints, and business insights written by Zonova Technologies."
+      }
+    ]
+  }), []);
+
   return (
     <div className="bg-white">
-      <SEO title="Blog & Insights - Latest Tech & Marketing Strategy" description="Discover search engine optimization (SEO) tips, web development guides, growth marketing blueprints, and business insights written by Zonova Technologies." />
+      <SEO 
+        title="Blog & Insights - Latest Tech & Marketing Strategy" 
+        description="Discover search engine optimization (SEO) tips, web development guides, growth marketing blueprints, and business insights written by Zonova Technologies." 
+        schema={blogListSchema}
+        canonicalPath="/blog"
+      />
 
       <section className="relative overflow-hidden bg-bgSec py-16 border-b border-slate-100">
         {/* Floating stickers */}
